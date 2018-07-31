@@ -1,5 +1,5 @@
 ---
-title: PHP 5.2 <br/> on Debian 7 <em>Wheezy</em>
+title: PHP 5.2 on <br/> Debian 7 <em>Wheezy</em>
 ---
 
 Sometimes you need to bring back to life old lines of code which will only works with old PHP versions. We will here see how to install PHP 5.2 on Debian 7 *Wheezy*[[because I couldn't get it work on Debian 8 *Jessie*...]].
