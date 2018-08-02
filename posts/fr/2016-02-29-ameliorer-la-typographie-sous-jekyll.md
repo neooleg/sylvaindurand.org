@@ -92,7 +92,7 @@ On utilise alors le code suivant pour obtenir le résultat désiré :
 ```html
 {% assign t = t | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;'
                 | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!'
-                | replace @: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
+                | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 ```
 {% endraw %}
 
@@ -117,7 +117,7 @@ Finalement, le code suivant permet d'obtenir toutes les améliorations typograph
                     | replace: ' %', '&#160;%'
                     | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;'
                     | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!'
-                    | replace @: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
+                    | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 
     {% if part.size == 2 %}
 
