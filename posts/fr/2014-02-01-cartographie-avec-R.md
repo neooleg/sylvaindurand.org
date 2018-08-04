@@ -63,6 +63,7 @@ plot(frontieres,  col="#666666", lwd=1, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![Carte de France](/assets/carto/france.jpg)](/assets/carto/france.pdf)
 
 ## Coloration d'une donnée : densité de population
@@ -116,6 +117,7 @@ legend(-10000,6387500,fill=attr(leg, "palette"),
 dev.off()
 ```
 
+{:.large}
 [![Densité de population en 2013](/assets/carto/densite.jpg)](/assets/carto/densite.pdf)
 
 ## Coloration d'une donnée externe : le revenu médian
@@ -174,6 +176,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
 dev.off()
 ```
 
+{:.large}
 [![Revenu fiscal médian par unité de consommation par commune en 2010](/assets/carto/revenus.jpg)](/assets/carto/revenus.pdf)
 
 ## Traçage de données cartographiques : le réseau routier
@@ -204,6 +207,7 @@ plot(frontieres,  col="#666666", lwd=1, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![Réseau routier français en 2013](/assets/carto/routes.jpg)](/assets/carto/routes.pdf)
 
 ## Carte du monde vierge
@@ -240,6 +244,7 @@ plot(grille,col="#CCCCCC33",lwd=1, add=TRUE)
 dev.off()                          # Enregistrement du fichier
 ```
 
+{:.large}
 [![Carte du monde projetée en Winkel Tripel](/assets/carto/monde.jpg)](/assets/carto/monde.pdf)
 
 ## Coloration d'une donnée : l'indice de développement humain
@@ -280,6 +285,7 @@ legend(-15000000,-3000000,fill=attr(leg, "palette"),
 dev.off()
 ```
 
+{:.large}
 [![L'indice de développement humain (IDH) dans le monde](/assets/carto/idh.jpg)](/assets/carto/idh.pdf)
 
 ## Représentation en cercles : les villes les plus peuplées
@@ -318,6 +324,7 @@ plot(grille, col="#CCCCCC33", lwd=1, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![Carte du monde présentant la population des principales villes](/assets/carto/villes.jpg)](/assets/carto/villes.pdf)
 
 ## Représentation de données cartographiques : aires urbaines
@@ -337,4 +344,5 @@ plot(urbain, col="#FFFFFF", border="#FFFFFF66",lwd=1.5, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![Carte du monde projetée en Winkel Tripel](/assets/carto/urbain.jpg)](/assets/carto/urbain.pdf)

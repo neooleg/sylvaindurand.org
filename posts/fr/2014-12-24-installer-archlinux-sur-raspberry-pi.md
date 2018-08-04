@@ -15,6 +15,7 @@ Ainsi, pour suivre ce tutoriel, vous n'aurez besoin que de  :
 * un _câble µUSB_ pour mettre notre Raspberry Pi sous tension  ;
 * un _câble éthernet_ pour brancher notre Pi à notre routeur.
 
+{:.large}
 ![Raspberry Pi – Jonathan Rutheiser, CC BY-SA 3.0](/assets/raspberry/raspberrypi.svg)
 
 ## Installer *Archlinux*

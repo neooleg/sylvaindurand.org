@@ -63,6 +63,7 @@ plot(bounderies,  col="#666666", lwd=1, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![France blank map](/assets/carto/france.jpg)](/assets/carto/france.pdf)
 
 ## Visualizing a data: population density
@@ -116,6 +117,7 @@ legend(-10000,6387500,fill=attr(leg, "palette"),
 dev.off()
 ```
 
+{:.large}
 [![Population density in France](/assets/carto/density.jpg)](/assets/carto/density.pdf)
 
 ## Visualizing an external data : incomes
@@ -175,6 +177,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
 dev.off()
 ```
 
+{:.large}
 [![Median taxable income per consumption unit in France in 2010](/assets/carto/incomes.jpg)](/assets/carto/incomes.pdf)
 
 ## Visualizing map data: the road network
@@ -204,6 +207,7 @@ plot(boundaries,  col="#666666", lwd=1, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![French roads network](/assets/carto/routes.jpg)](/assets/carto/routes.pdf)
 
 ## Blank world map
@@ -240,6 +244,7 @@ plot(graticules, col="#CCCCCC33", lwd=1, add=TRUE)
 dev.off()                          # Saving file
 ```
 
+{:.large}
 [![Carte du monde projetée en Winkel Tripel](/assets/carto/monde.jpg)](/assets/carto/monde.pdf)
 
 ## Visualizing data: Human Development Index
@@ -280,6 +285,7 @@ legend(-15000000,-3000000,fill=attr(leg, "palette"),
 dev.off()
 ```
 
+{:.large}
 [![Human Development Index (HDI) in 2012](/assets/carto/hdi.jpg)](/assets/carto/hdi.pdf)
 
 ## Circles visualization: most populated cities
@@ -319,6 +325,7 @@ plot(graticules, col="#CCCCCC33", lwd=1, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![Most populated cities in the world](/assets/carto/villes.jpg)](/assets/carto/villes.pdf)
 
 ## Visualizing map data: urban areas
@@ -338,4 +345,5 @@ plot(areas, col="#FFFFFF", border="#FFFFFF66",lwd=1.5, add=TRUE)
 dev.off()
 ```
 
+{:.large}
 [![World map (Winkel Tripel projection)](/assets/carto/urbain.jpg)](/assets/carto/urbain.pdf)

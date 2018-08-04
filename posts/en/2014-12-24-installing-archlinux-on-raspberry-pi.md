@@ -15,6 +15,7 @@ So for this tutorial, you'll only need:
 * an _µUSB cable_ to put our Raspberry Pi powered;
 * an _ethernet cable_ to connect our Pi to our router.
 
+{:.large}
 ![Raspberry Pi – Jonathan Rutheiser, CC BY-SA 3.0](/assets/raspberry/raspberrypi.svg)
 
 ## Installing *Archlinux*
