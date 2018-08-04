@@ -15,13 +15,13 @@ Nous allons ici voir comment installer [*Gitolite*](http://gitolite.com/gitolite
 
 En premier lieu, nous allons créer sur le serveur un utilisateur `git` qui servira par la suite au fonctionnement de `gitolite`:
 
-```
+```none
 sudo adduser git
 ```
 
 Une fois connecté à `git` sur le serveur, nous allons créer un répertoire `bin` qui contiendra les fichiers binaires, que nous ajoutons ensuite au `PATH` :
 
-```
+```none
 cd ~
 mkdir bin
 PATH=$PATH:~/bin
@@ -32,7 +32,7 @@ PATH=~/bin:$PATH
 
 Nous nous connecterons à *Gitolite* avec une [authentification par clefs SSH](http://localhost:4000/authentification-par-clef-avec-ssh/), à la fois plus simple et plus sécurisée qu'une connexion HTTP. Si vous ne possédez pas déjà de clef, il est nécessaire d'en créer une. Pour cela, on exécute en local :
 
-```
+```none
 cd ~/.ssh
 ssh-keygen -t ed25519
 ```
@@ -41,7 +41,7 @@ Lorsque le chemin de la clef est demandé, indiquez simplement votre nom d'utili
 
 Nous envoyons alors la clef publique sur le serveur :
 
-```
+```none
 cat ~/.ssh/<user>.pub | ssh git@<hostname> -p <port> 'umask 0077; mkdir -p .ssh; cat >> <user>.pub'
 ```
 
@@ -59,7 +59,7 @@ Host git
 
 Connecté à l'utilisateur `git` sur le serveur, il est désormais possible installer *Gitolite* :
 
-```
+```none
 cd ~
 git clone git://github.com/sitaramc/gitolite
 gitolite/install -ln
@@ -68,7 +68,7 @@ gitolite setup -pk ~/<user>.pub
 
 En local, vous pouvez désormais vérifier que tout fonctionne bien avec la commande `ssh git`. Celle-ci doit vous retourner quelque chose comme :
 
-```
+```none
 PTY allocation request failed on channel 0
 hello <user>, this is git@<hostname> running
 gitolite3 v3.6.5-9-g490b540 on git 2.1.4
@@ -83,7 +83,7 @@ C'est tout ! Désormais, pour cloner un répertoire `repo`, il suffira d'exécut
 
 La principale originalité de *Gitolite* est que son système de configuration repose sur un répertoire *git*. Pour le configurer, il suffit de cloner le répertoire `gitolite-admin` :
 
-```
+```none
 git clone git:gitolite-admin
 ```
 

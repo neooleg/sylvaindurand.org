@@ -14,13 +14,13 @@ Here we will see how to install [*Gitolite*](http://gitolite.com/gitolite/index.
 
 First, we will create on the server a `git` user, which will be needed:
 
-```
+```none
 sudo adduser git
 ```
 
 Once connected to `git` on the server, we create a `bin` directory that will contain binaries, that we then add to the `path`:
 
-```
+```none
 cd ~
 mkdir bin
 PATH=$PATH:~/bin
@@ -31,7 +31,7 @@ PATH=~/bin:$PATH
 
 In order to connect to *Gitolite*, we will used SSH key-based authentication, both simpler and more secure than HTTP. If you do not already have a key, it is necessary to create one. For this, we will used `ssh-keygen` locally:
 
-```
+```none
 cd ~/.ssh
 ssh-keygen -t ed25519
 ```
@@ -40,7 +40,7 @@ When the path is requested, enter your username `<user>`. The password is option
 
 We then send the public key on the server:
 
-```
+```none
 cat ~/.ssh/<user>.pub | ssh git@<hostname> -p <port> 'umask 0077; mkdir -p .ssh; cat >> <user>.pub'
 ```
 
@@ -59,7 +59,7 @@ Host git
 
 Back to the user `git` on the server, we can now install *Gitolite*:
 
-```
+```none
 cd ~
 git clone git://github.com/sitaramc/gitolite
 gitolite/install -ln
@@ -68,7 +68,7 @@ gitolite setup -pk ~/<user>.pub
 
 Locally, you can now check that everything works well with `ssh git`. This should return something like:
 
-```
+```none
 PTY allocation request failed on channel 0
 hello <user>, this is git@<hostname> running
 gitolite3 v3.6.5-9-g490b540 on git 2.1.4
@@ -84,7 +84,7 @@ That's all ! Now, if you want to clone a `repo` directory, simply run the comman
 
 The main originality of *Gitolite* is that its configuration system uses a specific *git* repository. To configure *Gitolite*, simply clone the `gitolite-admin` repository:
 
-```
+```none
 git clone git:gitolite-admin
 ```
 

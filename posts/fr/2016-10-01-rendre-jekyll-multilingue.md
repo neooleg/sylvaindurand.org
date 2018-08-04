@@ -41,7 +41,7 @@ La façon de procéder est particulièrement simple : nous allons indiquer, pour
 
 Pour cela, on utilise des variables `lang` et `ref` dans l'entête de chaque article et de chaque page. Par exemple, pour l'anglais :
 
-```python
+```markdown
 ---
 title: Hello world!
 lang: en
@@ -51,7 +51,7 @@ ref: hello
 
 Puis en français :
 
-```python
+```markdown
 ---
 title: Bonjour le monde !
 lang: fr
@@ -61,7 +61,7 @@ ref: hello
 
 Et enfin, en chinois :
 
-```python
+```markdown
 ---
 title: 你好，世界！
 lang: zh
@@ -178,7 +178,7 @@ En dehors du contenu des articles, il est également nécessaire de traduire les
 
 Pour cela, on peut indiquer des traductions dans `_config.yml`[[depuis la deuxième version de *Jekyll*, il est également possible de placer ces informations dans le dossier [_data](http://jekyllrb.com/docs/datafiles/)]]. Ainsi, dans l'exemple suivant, {% raw %}`{{ site.t[page.lang].home }}`{% endraw %} génèrera `Home`, `Accueil` ou `首页` selon la langue de la page :
 
-```python
+```yml
 t:
   en:
     home:  "Home"
@@ -190,7 +190,7 @@ t:
 
 Il est possible d'utiliser cette technique pour générer les menus des différentes versions du site. Ainsi, dans le cas d'un menu à deux éléments comme sur ce site, on indique dans `_config.yml` :
 
-```python
+```yml
 t:
   en:
     home:
@@ -237,7 +237,7 @@ Le menu peut alors être généré à l'aide d'une boucle :
 Pour cela, il suffit d'utiliser le code suivant, qu'il est possible ensuite de placer dans le dossier `_includes` afin de l'utiliser à plusieurs reprises :
 
 {% raw %}
-```python
+```liquid
 {% if page.lang == 'en' %}
     {{ page.date | date: "%d/%m/%Y" }}
 {% endif %}
@@ -260,7 +260,7 @@ Pour les dates longues, il est possible d'utiliser astucieusement les filtres de
 Nous utilisons alors le code suivant :
 
 {% raw %}
-```python
+```liquid
 {% capture hide %}
 
 {% if include.mode != 'month' %}
@@ -337,7 +337,7 @@ Nous utilisons alors le code suivant :
 On place ce code dans un fichier `date.html` placé dans le dossier `_includes` pour pouvoir l'appeler simplement avec :
 
 {% raw %}
-```html
+```liquid
 {% include date.html date=page.date %}
 ```
 {% endraw %}
@@ -345,7 +345,7 @@ On place ce code dans un fichier `date.html` placé dans le dossier `_includes` 
 Il suffit alors, pour avoir une date complète, d'utiliser le code :
 
 {% raw %}
-```html
+```liquid
 {{ day }}{{ sup }} {{ month }} {{ year }}
 ```
 {% endraw %}

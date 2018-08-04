@@ -11,7 +11,7 @@ This is especially true when you want to indent your *Liquid* code, or want to u
 For instance, the following example[[which show each multiplication which gives "12"]] will generate almost 500 lignes of codes, almost empty:
 
 {% raw %}
-```html
+```liquid
 <ul>
 {% for i in (1..12) %}
   {% for j in (1..12) %}
@@ -45,7 +45,7 @@ However, in order to get a readable HTML code, we would like to get:
 A first answer, which is also the less satisfying, would be to delete all spaces and linebreak which shoudn't be shown. In the previous example, it would give:
 
 {% raw %}
-```html
+```liquid
 <ul>{% for i in (1..12) %}{% for j in (1..12) %}{% assign result = i | times: j %}{% if result == 12 %}
     <li> {{ i }} ⨉ {{ j }} = 12 </li>{% endif %}{% endfor %}{% endfor %}
 </ul>
@@ -63,7 +63,7 @@ By using a `capture` tag around a *Liquid* code, you will hide its output, and t
 The previous example would become:
 
 {% raw %}
-```html
+```liquid
 <ul>{% capture hide %}
 {% for i in (1..12) %}
   {% for j in (1..12) %}
@@ -86,7 +86,7 @@ The code remains still a little verbous, and isn't that clean yet.
 Since *Jekyll* 3.0.0, it is possible to put linebreaks *inside* *Liquid* tags, without any influence on the output code. So, it is possible to indent your code like:
 
 {% raw %}
-```html
+```liquid
 <ul>{%
 for i in (1..12) %}{%
   for j in (1..12) %}{%

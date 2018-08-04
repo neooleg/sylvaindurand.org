@@ -15,19 +15,19 @@ The key-based authentication can fill these two requirements: it provides a very
 
 First, we will locally create an SSH private key, and the associated public key:
 
-```
+```none
 cd ~/.ssh
 ```
 
 The algorithm `ed25519` appears so far to be one of the most secure, while remaining very fast:
 
-```
+```none
 ssh-keygen -t ed25519
 ```
 
 However, it is still new and is not supported on all systems. In this case, it is possible to use RSA instead:
 
-```
+```none
 ssh-keygen -t rsa -b 4096
 ```
 
@@ -47,7 +47,7 @@ We need to transmit the public key we just generated to the server. Its content 
 
 Locally, this can be done in one command line:
 
-```
+```none
 cat ~/.ssh/<user>.pub | ssh <user>@<hostname> -p <port> 'umask 0077; mkdir -p .ssh; cat >> ~/.ssh/authorized_keys'
 ```
 
@@ -55,7 +55,7 @@ cat ~/.ssh/<user>.pub | ssh <user>@<hostname> -p <port> 'umask 0077; mkdir -p .s
 
 In order to be able to quickly connect to the server, we create a local configuration file:
 
-```
+```none
 nano ~/.ssh/config
 ```
 
@@ -71,7 +71,7 @@ Host <shortcut>
 
 In order to connect to the server, we will now just have to use:
 
-```
+```none
 ssh <shortcut>
 ```
 

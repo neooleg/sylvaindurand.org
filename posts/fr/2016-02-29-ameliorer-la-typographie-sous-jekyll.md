@@ -25,7 +25,7 @@ Il faut prendre garde de n'appliquer les modifications que dans les paragraphes 
 Pour ce faire, nous allons simplement remplacer {% raw %}`{{ content }}`{% endraw %}, présent dans `_layout/default.html`[[ou équivalent]], par :
 
 {% raw %}
-```html
+```liquid
 {% capture hide %}
   {% assign content = content | split: '<pre' %}
 
@@ -53,7 +53,7 @@ Il nous suffit alors d'agir sur la variable `t`, qui correspond aux textes, en a
 Par exemple, pour remplacer tous les *a* en *b* dans les textes, mais pas dans les blocs de code, il suffit d'utiliser :
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: 'a' , 'b' %}
 ```
 {% endraw %}
@@ -67,7 +67,7 @@ Nous allons montrer ici comment faire en sorte que *Jekyll* génère automatique
 Pour obtenir des guillemets français `«` et `»`, remplaçons simplement les guillemets anglais en indiquant, sur la base de la section précédente, avec :[[nous ajoutons une espace insécable normale avant le guillemet fermant, et après le guillemet entrant, avec `&#160;`]]
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: '“', '«&#160;'
                 | replace: '”', '&#160;»' %}
 ```
@@ -78,7 +78,7 @@ Pour obtenir des guillemets français `«` et `»`, remplaçons simplement les g
 En français, les signes deux-points (`:`) et pourcent (`%`) doivent être précédés d'une espace insécable normale, qui s'obtient avec `&#160;`. Pour remplacer les espaces simples que vous allez taper devant[[bien que la plupart des navigateurs empêchent eux-mêmes un saut de ligne avant ces symboles]], on utilise comme précédemment :
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: ' :', '&#160;:'
                 | replace: ' %', '&#160;%' %}
 ```
@@ -89,7 +89,7 @@ En revanche, le point-virgule (`;`), le point d'exclamation (`!`) et le point  d
 On utilise alors le code suivant pour obtenir le résultat désiré :
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;'
                 | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!'
                 | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
@@ -101,7 +101,7 @@ On utilise alors le code suivant pour obtenir le résultat désiré :
 Finalement, le code suivant permet d'obtenir toutes les améliorations typographiques présentées ci-dessus :
 
 {% raw %}
-```html
+```liquid
 {% capture hide %}
   {% assign content = content | split: '<pre' %}
 
@@ -135,7 +135,7 @@ Finalement, le code suivant permet d'obtenir toutes les améliorations typograph
 Si votre site est multilingue[[par exemple sur la base de l'article [Rendre *Jekyll* multilingue](/rendre-jekyll-multilingue/)]], vous pouvez n'appliquer ces modifications que sur les pages françaises en plaçant, autour des parties concernées :
 
 {% raw %}
-```html
+```liquid
 {% if page.lang == 'fr' %}
 ...
 {% endif %}

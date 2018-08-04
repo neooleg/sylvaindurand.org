@@ -81,7 +81,7 @@ Nous allons utiliser `s3cmd` pour mettre à jour notre site directement sur *S3*
 
 Sous Mac OS, avec *Homebrew*, on installe `s3cmd` avec l'option `devel`, ainsi que `gnupg` pour des transferts sécurisés :
 
-```bat
+```none
 brew install --devel s3cmd
 brew install gpg
 ```
@@ -90,7 +90,7 @@ Nous devons maintenant donner l'autorisation à `s3cmd` d'intéragir avec notre 
 
 Par ailleurs, afin d'optimiser les images, nous allons installer `jpegoptim` et `optipng` :
 
-```bat
+```none
 brew install jpegoptim
 brew install optipng
 ```
@@ -99,20 +99,20 @@ brew install optipng
 
 On commence par générer jekyll dans le dossier `_site` :
 
-```bat
+```none
 jekyll build
 ```
 
 L'utilisation du plugin `jekyll-press` permet d'optimiser les fichiers HTML, JS et CSS. Si `jpegoptim` et `optipng` sont installés sur le système, nous pouvons optimiser les pages et les images :
 
-```bat
+```none
 find _site -name '*.jpg' -exec jpegoptim --strip-all -m80 {} \;
 find _site -name '*.png' -exec optipng -o5 {} \;
 ```
 
 Afin d'accélérer encore un peu plus le chargement du site, nous compressons l'ensemble des fichiers HTML, CSS et JS, c'est-à-dire les fichiers qui sont hors de `static/` :
 
-```bat
+```none
 find _site -path _site/static -prune -o -type f \
 -exec gzip -n "{}" \; -exec mv "{}.gz" "{}" \;
 ```
@@ -129,7 +129,7 @@ Nous pouvons alors utiliser `s3cmd` pour déployer notre site en ligne. Seuls le
 
 Nous commençons ainsi par envoyer tous les fichiers multimédias stockés dans `static/`, en leur affectant une durée de cache de dix semaines :
 
-```bat
+```none
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
@@ -138,7 +138,7 @@ s3cmd --acl-public --cf-invalidate -M \
 
 Nous envoyons tous les autres fichiers (HTML, CSS, JS), auxquels nous affectons une durée de cache de 48 heures, et nous indiquons que le contenu est compressé :
 
-```bat
+```none
 s3cmd --acl-public --cf-invalidate -M \
       --add-header 'Content-Encoding:gzip' \
       --add-header="Cache-Control: max-age=604800" \
@@ -149,7 +149,7 @@ s3cmd --acl-public --cf-invalidate -M \
 
 Enfin, nous faisons le ménage en supprimant en ligne tout ce qui n'existe plus dans notre dossier local, et on actualise la page d'accueil `index.html` sur *Cloudfront* (ce que ne fait pas `cf-invalidate`) :
 
-```bat
+```none
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/
 ```
@@ -200,7 +200,7 @@ Commençons par activer la création de logs par notre distribution *Cloudfront*
 
 Nous créons en local un dossier qui va récupérer ces logs, puis nous pouvons alors récupérer les logs puis les supprimer du *bucket* à l'aide de `s3cmd` :
 
-```bat
+```none
 mkdir ~/awstats
 mkdir ~/awstats/logs
 s3cmd get --recursive s3://statistiques/ ~/awstats/logs/
@@ -211,7 +211,7 @@ s3cmd del --recursive --force s3://statistiques/
 
 Commençons par installer et copier *Awstats* (où `www.domain.tld` est votre nom de domaine) :
 
-```bat
+```none
 sudo apt-get install awstats
 sudo cp /etc/awstats/awstats.conf \
         /etc/awstats/awstats.www.domain.tld.conf
@@ -220,7 +220,7 @@ sudo nano /etc/awstats/awstats.www.domain.tld.conf
 
 Dans ce fichier de configuration, modifiez les paramètres suivants pour indiquer à *Awstats* comment traiter les logs de *Cloudfront* (où `user` est votre nom d'utilisateur) :
 
-```r
+```
 # Traitement des multiples fichiers logs au format gzip
 LogFile="/usr/share/awstats/tools/logresolvemerge.pl /home/user/awstats/logs/* |"
 # Format des logs générés par CloudFront
@@ -233,7 +233,7 @@ HostAliases="REGEX[.cloudfront\.net]"
 
 Enfin, nous copions les images qui seront affichées dans les rapports :
 
-```bat
+```none
 sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
 ```
 
@@ -241,7 +241,7 @@ sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
 
 Une fois cette configuration faite, il est possible de générer les statistiques sous forme d'un fichier HTML statique l'aide de :
 
-```bat
+```none
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
 ```
@@ -264,7 +264,7 @@ s3cmd del --recursive --force s3://statistiques/
 
 Nous donnons à ce fichier les droits pour qu'il puisse être exécuté, puis créons une tâche `cron` :
 
-```bat
+```none
 sudo chmod 711 ~/awstats/stats.sh
 sudo crontab -e
 ```

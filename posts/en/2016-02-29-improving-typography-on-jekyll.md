@@ -25,7 +25,7 @@ Care must be taken to apply the changes only in paragraphs, not in code blocks t
 To do so, we will replace {% raw %}`{{ content }}`{% endraw %}, in the `_layout/default.html` file[[or equivalent]], with :
 
 {% raw %}
-```html
+```liquid
 {% capture hide %}
   {% assign content = content | split: '<pre' %}
 
@@ -53,7 +53,7 @@ We just have to act on the variable `t`, which corresponds to the texts, by appl
 For example, if you want to replace all *a*'s in *b*'s in the texts, but not in the code blocks, juste use:
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: 'a' , 'b' %}
 ```
 {% endraw %}
@@ -67,7 +67,7 @@ We will show here how to make *Jekyll* automatically generates quotes French and
 For quotes French `«` and `»`, we simply replace English quotation marks, as seen in the previous section, with:[[we add a normal non-breaking space before the closing quotation mark, and after entering quote with `&#160;`]]
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: '“', '«&#160;'
                 | replace: '”', '&#160;»' %}
 ```
@@ -78,7 +78,7 @@ For quotes French `«` and `»`, we simply replace English quotation marks, as s
 In French, the colons (`:`) and percent (`%`) must be preceded by a normal non-breaking space, which is obtained with `&#160;`. We use:
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: ' :', '&#160;:'
                 | replace: ' %', '&#160;%' %}
 ```
@@ -89,7 +89,7 @@ However, the semicolon (`;`), the exclamation point (`!`) and the question mark 
 We then use the following code to get the desired result:
 
 {% raw %}
-```html
+```liquid
 {% assign t = t | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;'
                 | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!'
                 | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
@@ -101,7 +101,7 @@ We then use the following code to get the desired result:
 Finally, the following code provides all the typographical improvements presented above:
 
 {% raw %}
-```html
+```liquid
 {% capture hide %}
   {% assign content = content | split: '<pre' %}
 
@@ -135,7 +135,7 @@ Finally, the following code provides all the typographical improvements presente
 If your website is multilingual[[as explained, for example, in the article [Making *Jekyll* multilingual](/making-jekyll-multilingual/)]], you can restrict the previous modifications to the French articles, by adding:
 
 {% raw %}
-```html
+```liquid
 {% if page.lang == 'fr' %}
 ...
 {% endif %}

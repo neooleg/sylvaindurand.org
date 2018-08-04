@@ -24,7 +24,7 @@ Parmi les nombreuses distributions disponibles pour Raspberry Pi, nous allons ut
 
 Commençons par récupérer la dernière version d'*Archlinux*, dont une [image](http://downloads.raspberrypi.org/arch/images/arch-2014-06-22/ArchLinuxARM-2014.06-rpi.img.zip) est proposée sur le site de Raspberry Pi[[à la date de rédaction de cet article, la dernière image publiée sous ce format date de juin 2014 ; cela pose cependant peu de difficulté, puisque nous mettrons le système à jour dès qu'il sera installé]]. Téléchargez-là, puis extrayez là :
 
-```bash
+```none
 curl -OL http://downloads.raspberrypi.org/arch/images/arch-2014-06-22/ArchLinuxARM-2014.06-rpi.img.zip
 unzip ArchLinuxARM-2014.06-rpi.img.zip
 ```
@@ -34,13 +34,13 @@ Nous allons écrire l'image d'*Archlinux* précédemment téléchargée sur la c
 
 Il nous est nécessaire de connaître le chemin d'accès à la carte SD. Sous macOS, on lance dans le terminal la commande suivante pour l'identifiant de votre carte SD (`/dev/disk2` dans l'exemple qui suit) :
 
-```bash
+```none
 diskutil list
 ```
 
 Nous allons maintenant écrire l'image sur la carte. Attention, l'intégralité du contenu de la carte SD sera perdu ! Pour cela, nous entrons les commandes suivantes (où `/dev/disk2`[[sous macOS, on utilise `rdisk2` à la place de `disk2` lors de la commande `dd` pour nettement accélérer la copie]] est le chemin vers la carte SD) :
 
-```bash
+```none
 diskutil unmountDisk /dev/disk2
 sudo dd if=ArchLinuxARM-2014.06-rpi.img of=/dev/rdisk2 bs=1m
 sudo diskutil eject /dev/disk2
@@ -65,7 +65,7 @@ Pour plus de confort, rendez-vous sur l'interface d'administration de votre rout
 
 Une fois l'adresse du Raspberry Pi connue (nous prendrons `192.168.1.1` pour exemple dans la suite), nous pouvons nous connecter en SSH à notre Raspberry Pi avec la commande :
 
-```bash
+```none
 ssh root@192.168.1.1
 ```
 
@@ -78,13 +78,13 @@ Pour cela, la façon de procéder dépend largement du modèle de votre routeur 
 
 Une fois cela réalisé, nous pouvons désormais nous connecter depuis n'importe où sur internet (où `80.23.170.17` est l'IP externe de notre réseau) :
 
-```bash
+```none
 ssh root@80.23.170.17
 ```
 
 Nous pouvons également attribuer un nom de domaine à notre Raspberry (notamment si celui-ci va servir de serveur web). Chez votre registar, créez pour votre `domain.tld` un champ `A` dans lequel vous indiquez l'adresse IP externe (`80.23.170.17` dans notre exemple). Une fois les modifications validées, nous pouvons accéder à notre Pi avec :
 
-```bash
+```none
 ssh pi@domain.tld
 ```
 
@@ -96,13 +96,13 @@ Validez alors le certificat de sécurité qui est présenté, puis entrez le mot
 
 Au lancement du nouveau système, commençons par changer le mot de passe administrateur :
 
-```bash
+```none
 passwd root
 ```
 
 Nous pouvons par ailleurs en profiter pour créer un compte utilisateur, à qui on peut donner un droit de `sudo` :
 
-```bash
+```none
 useradd -m -g users -G wheel -s /bin/bash pi
 passwd pi
 pacman -S sudo
@@ -112,7 +112,7 @@ pacman -S sudo
 
 Pour mettre à jour l'intégralité[[cette commande mettra à jour aussi bien vos logiciels que les pilotes nécessaires au Raspberry Pi]] du système, on utilise simplement la commande suivante :
 
-```bash
+```none
 pacman -Suy
 ```
 
@@ -120,19 +120,19 @@ pacman -Suy
 
 Par défaut, le système est configuré en anglais. Afin d'obtenir une interface dans une autre langue, modifions le fichier suivant :
 
-```bash
+```none
 nano /etc/locale.gen
 ```
 
 Pour le français, il suffit de décommenter la ligne `fr_FR.UTF-8`. On regénère alors les *locales* avec :
 
-```bash
+```none
 locale-gen
 ```
 
 Sélectionnons alors cette locale par défaut en éditant le fichier suivant :
 
-```bash
+```none
 nano /etc/locale.conf
 ```
 
@@ -150,33 +150,33 @@ Au redémarrage, le terminal sera alors dans la bonne langue.
 
 *Archlinux* utilise par défaut l'éditeur de texte `vi`, auquel je préfère `nano` pour sa simplicité. Afin de l'utiliser par défaut, les deux commandes suivantes suffisent :
 
-```bash
+```none
 pacman -Rns vi
 ln -s /usr/bin/nano /usr/bin/vi
 ```
 
 Il est également possible de renommer le nom de la machine qui s'affiche dans le terminal. Par exemple :
 
-```bash
+```none
 hostname raspberry
 ```
 
 ### Améliorer la sécurité
 Notre Raspberry Pi étant branché à un réseau, il sera soumis à de nombreuses attaques. Pour limiter les risques, il est tout d'abord possible de changer le port par défaut de SSH (22) en un port quelconque. Pour cela, modifiez le fichier suivant :
 
-```bash
+```none
 nano /etc/ssh/sshd_config
 ```
 
 Changez-y la ligne indiquant `Port 22` en remplaçant `22` par le port de votre choix (par exemple, `50132`). Vous pourrez alors vous connecter en SSH comme précédemment en indiquant le paramètre `-p 50132` :
 
-```bash
+```none
 ssh pi@80.23.170.17 -p 50132
 ```
 
 Par ailleurs, le paquet `fail2ban` permet d'empêcher les attaques par dictionnaire ou par *bruteforce* en lisant les logs de connexion et en bloquant les tentatives répétées de connexion avec un nom d'utilisateur ou un mot de passe incorrect. Il suffit pour cela d'installer le paquet :
 
-```bash
+```none
 pacman -S fail2ban
 ```
 

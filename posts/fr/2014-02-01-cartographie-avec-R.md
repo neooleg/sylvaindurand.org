@@ -37,7 +37,7 @@ Pour afficher les pays environnants en fond de carte, nous utilisons les donnée
 ```r
 # Lecture des pays et sélection de l'Europe
 europe <- readOGR(dsn="shp/ne/cultural", layer="ne_10m_admin_0_countries")
- <- europe[europe$REGION_UN=="Europe",]
+europe <- europe[europe$REGION_UN=="Europe",]
 ```
 
 ### Projection et traçage
@@ -47,7 +47,6 @@ Notre carte utilisera la projection Lambert 93, [projection officielle](http://w
 La carte peut alors être générée à l'aide de `plot` : on affiche en premier les frontières françaises, afin que le graphique soit centré sur la France. La couleur des bordures de chaque objet sont définies avec `border`, leur épaisseur avec `lwd` et le remplissage avec `col`.
 
 ```r
-
 # Projection en Lambert 93
 europe <- spTransform(europe, CRS("+init=epsg:2154"))
 
@@ -73,8 +72,7 @@ Le très grand nombre de communes en France offre un très beau maillage pour le
 
 ```r
 # Lecture des communes
-communes     <- readOGR(dsn="shp/geofla", layer="COMMUNE")
-
+communes <- readOGR(dsn="shp/geofla", layer="COMMUNE")
 # Calcul de la densité.
 communes$DENSITE <- communes$POPULATION/communes$SUPERFICIE*100000
 ```
@@ -252,6 +250,7 @@ L'utilisation la plus fréquente de ce type de carte consiste à colorer chaque 
 # Lecture des données et jointure avec les pays
 idh  <- read.csv('csv/idh.csv')
 pays <- merge(pays, idh, by.x="iso_a3", by.y="Abbreviation")
+
 # Conversion de l'IDH en valeur numérique
 pays$idh <- as.numeric(levels(pays$X2012.HDI.Value))[pays$X2012.HDI.Value]
 
@@ -290,8 +289,8 @@ La population de plusieurs des principales villes mondiales est fournie par [Nat
 
 ```r
 # Chargement du shapefile
-villes <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_populated_places")
-villes <- spTransform(villes,  CRS("+proj=wintri"))
+villes <- readOGR(dsn="shp/ne/cultural", layer="ne_110m_populated_places")
+villes <- spTransform(villes, CRS("+proj=wintri"))
 ```
 
 ### Calcul des rayons
@@ -311,10 +310,10 @@ On trace alors le graphique :
 pdf('villes.pdf',width=10,height=6)
 par(mar=c(0,0,0,0))
 
-plot(boite, col="white",    border="grey90",lwd=1)
-plot(pays,  col="#E6E6E6",  border="#AAAAAA",lwd=1, add=TRUE)
-points(villes,col="#8D111766",bg="#8D111766",lwd=1, pch=21,cex=villes$rayon)
-plot(grille,col="#CCCCCC33",lwd=1, add=TRUE)
+plot(boite, col="white", border="grey90", lwd=1)
+plot(pays, col="#E6E6E6", border="#AAAAAA", lwd=1, add=TRUE)
+points(villes, col="#8D111766", bg="#8D111766", lwd=1, pch=21,cex=villes$rayon)
+plot(grille, col="#CCCCCC33", lwd=1, add=TRUE)
 
 dev.off()
 ```
@@ -331,9 +330,9 @@ urbain <- spTransform(urbain, CRS("+proj=wintri"))
 
 pdf('urbain.pdf',width=10,height=6)
 par(mar=c(0,0,0,0))
-plot(boite, col="#000000",    border="#000000",lwd=1)
-plot(pays,  col="#000000",  border="#000000",lwd=1, add=TRUE)
-plot(urbain,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
+plot(boite, col="#000000", border="#000000",lwd=1)
+plot(pays, col="#000000", border="#000000",lwd=1, add=TRUE)
+plot(urbain, col="#FFFFFF", border="#FFFFFF66",lwd=1.5, add=TRUE)
 
 dev.off()
 ```

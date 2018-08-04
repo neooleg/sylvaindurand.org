@@ -15,19 +15,19 @@ L'authentification par clef permet de concilier ces deux exigences : elle permet
 
 Dans un premier temps, nous allons générer en local une clef SSH privée et la clef publique associée :
 
-```
+```none
 cd ~/.ssh
 ```
 
 L'algorithme `ed25519` apparaît à ce jour être l'un des plus sécurisés, tout en restant très rapide :
 
-```
+```none
 ssh-keygen -t ed25519
 ```
 
 Néanmoins, ce dernier est encore récent et n'est pas supporté sur tous les systèmes. Dans ce cas, il est possible d'utiliser le RSA :
 
-```
+```none
 ssh-keygen -t rsa -b 4096
 ```
 
@@ -47,7 +47,7 @@ Pour que le serveur nous reconnaisse, nous devons lui transmettre la clef publiq
 
 En local, cela peut être fait en une ligne de commande :
 
-```
+```none
 cat ~/.ssh/<user>.pub | ssh <user>@<hostname> -p <port> 'umask 0077; mkdir -p .ssh; cat >> ~/.ssh/authorized_keys'
 ```
 
@@ -55,7 +55,7 @@ cat ~/.ssh/<user>.pub | ssh <user>@<hostname> -p <port> 'umask 0077; mkdir -p .s
 
 Pour nous connecter sur le serveur très rapidement, nous allons créer en local un fichier de configuration avec ses coordonnées :
 
-```
+```none
 nano ~/.ssh/config
 ```
 
@@ -71,7 +71,7 @@ Host <shortcut>
 
 Pour se connecter, il suffit désormais de taper :
 
-```
+```none
 ssh <shortcut>
 ```
 

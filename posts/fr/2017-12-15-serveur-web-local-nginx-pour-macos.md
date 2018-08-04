@@ -16,7 +16,7 @@ Nous allons voir ici comment installer *Nginx*, PHP-FPM et *MariaDB* (MySQL) sou
 
 Pour l'installer, il suffit d'exécuter la commande indiquée sur le [site officiel](http://brew.sh):
 
-```bash
+```none
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
@@ -31,7 +31,7 @@ Bien qu'une version d'*Apache* soit nativement fournie avec macOS, nous nous pro
 
 Pour installer et lancer *Nginx* au démarrage, on utilise:
 
-```bash
+```none
 brew install nginx
 sudo brew services start nginx
 ```
@@ -42,7 +42,7 @@ Bien qu'il ne faille pas utiliser `sudo` avc `brew install`, il est nécessaire 
 
 Nous souhaitons pouvoir stocker notre site internet dans le dossier de notre choix, et y accéder à l'URL `http://localhost/`. Pour cela, on édite le fichier de configuration :
 
-```bash
+```none
 nano /usr/local/etc/nginx/nginx.conf
 ```
 To begin, we will have to give to *Nginx* the permission to access our files and avoid a nasty `403 Forbidden` error. To do so, we change the first line, where `<user>` is your username:
@@ -65,7 +65,7 @@ server {
 ```
 
 Ensuite, nous relançons *Nginx* pour que les changements soient pris en compte :
-```bash
+```none
 sudo brew services restart nginx
 ```
 
@@ -74,13 +74,13 @@ sudo brew services restart nginx
 
 Pour utiliser PHP avec *Nginx*, nous allons utiliser PHP-FPM. Nous allons ici utiliser PHP 7.2, mais il est facile d'obtenir d'autres versions :
 
-```bash
+```none
 brew install php72
 ```
 
 Ensuite, on édite à nouveau le fichier de configuration :
 
-```bash
+```none
 nano /usr/local/etc/nginx/nginx.conf
 ```
 
@@ -106,34 +106,34 @@ location ~ \.php {
 
 Pour éviter l'erreur `File not found.`, il faut également donner les droits d'accès à PHP-FPM. Pour cela, on édite le fichier suivant :
 
-```
+```none
 nano /usr/local/etc/php/7.2/php-fpm.d/www.conf
 ```
 
 On modifie les paramètres suivants :
 
-```
+```apache
 user = <user>
 group = staff
 ```
 
 Enfin, on redémarre *Nginx* pour activer ces changements, et on lance bien PHP-FPM pour éviter un  `502 Bad Gateway`:
 
-```bash
+```none
 sudo brew services restart nginx
 sudo brew services start php72
 ```
 ## MySQL
 
 On installe et lance désormais MariaDB pour obtenir une base MySQL :
-```bash
+```none
 brew install mariadb
 brew services start mariadb
 ```
 
 Enfin, on finalise l'installation en choisissant un mot de passe `root` pour MySQL :
 
-```bash
+```none
 mysql_secure_installation
 ```
 

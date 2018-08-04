@@ -15,7 +15,7 @@ This possibility is particularly interesting when using many subdomains: so far,
 To get our certificates, we will use the `certbot` client. The site offers several [installation methods](https://certbot.eff.org) depending on your platform, but version 0.22.0 may not be available. By default, `certbot` can be installed manually:
 
 
-```
+```none
 cd /opt/
 sudo wget https://dl.eff.org/certbot-auto
 sudo chmod a+x certbot-auto
@@ -30,7 +30,7 @@ For now, the `certbot-auto` utility allows you to request wilcard certificates, 
 
 Be careful, if you want a certificate for both the domain root (`domain.tld`) and its subdomains (`*.domain.tld`), both must be specified. With the `-d` parameter, it is possible to list the desired domains and subdomains:
 
-```
+```none
 sudo /opt/certbot-auto certonly \
     --server https://acme-v02.api.letsencrypt.org/directory \
     --manual -d *.domain.tld -d domain.tdl
@@ -75,18 +75,18 @@ Once created, the certificate is located in `/etc/letsencrypt/live/domain.tld`.
 
 The certificate is valid for three months, before having to be renewed. To do so, we create a cron task:
 
-```
+```none
 sudo crontab -e
 ```
 
 We do the renewal in the night from Sunday to Monday:
 
-```
+```none
 30 5 * * 1 /opt/certbot/certbot-auto renew
 ```
 
 It is also necessary to renew its server at the same time, so that it takes into account the new certificates. If you use *nginx*:
 
-```
+```none
 35 5 * * 1 /etc/init.d/nginx reload
 ```

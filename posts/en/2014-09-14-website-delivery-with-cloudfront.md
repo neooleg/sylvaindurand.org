@@ -75,7 +75,7 @@ We will use `s3cmd` in order to sync our bucket with our local files. Install th
 
 On Mac OS, with *Homebrew*, install `s3cmd` with `--devel` option, and `gnupg` for secured transfers:
 
-```bat
+```none
 brew install --devel s3cmd
 brew install gpg
 ```
@@ -84,7 +84,7 @@ Now we have to gives `s3cmd` the ability to deal with our *AWS* account. In [Sec
 
 In order to optimize images, we will install `jpegoptim` and `optipng`:
 
-```bat
+```none
 sudo brew install jpegoptim
 sudo brew install optipng
 ```
@@ -93,20 +93,20 @@ sudo brew install optipng
 
 We first build *Jekyll* into the `_site` folder:
 
-```bat
+```none
 jekyll build
 ```
 
 Using `jekyll-press` plugin will optimize HTML, CSS and JS files. If `jpegoptim` and `optipng` are installed, we can optimize images:
 
-```bat
+```none
 find _site -name '*.jpg' -exec jpegoptim --strip-all -m80 {} \;
 find _site -name '*.png' -exec optipng -o5 {} \;
 ```
 
 Then, in order to improve performances, we compress HTML, CSS and JS files with Gzip, that is to say all files out of `static/` folder:
 
-```bat
+```none
 find _site -path _site/static -prune -o -type f \
 -exec gzip -n "{}" \; -exec mv "{}.gz" "{}" \;
 ```
@@ -123,7 +123,7 @@ We use `s3cmd` to upload the website; only the updated files will be sent. We us
 
 We first send static files, stored in `static/`, assigning them a 10 weeks cache duration:
 
-```bat
+```none
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
@@ -132,7 +132,7 @@ s3cmd --acl-public --cf-invalidate -M \
 
 Then we send the other files (HTML, CSS, JS...) with a 48 hours cache duration:
 
-```bat
+```none
 s3cmd --acl-public --cf-invalidate -M \
       --add-header 'Content-Encoding:gzip' \
       --add-header="Cache-Control: max-age=604800" \
@@ -143,7 +143,7 @@ s3cmd --acl-public --cf-invalidate -M \
 
 Finally we clean the bucket by deleting files which have been deleted in the local folder, and we invalidate the home page on *Cloudfront* (`cf-invalidate` doesn't do it):
 
-```bat
+```none
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/
 ```
@@ -194,7 +194,7 @@ Let's start by activating logs creation on our *Cloudfront* distribution. In the
 
 We create locally a folder that will retrieve these logs, then we can then retrieve the logs and then delete the bucket using `s3cmd`:
 
-```bat
+```none
 mkdir ~/awstats
 mkdir ~/awstats/logs
 s3cmd get --recursive s3://statistics/ ~/awstats/logs/
@@ -205,7 +205,7 @@ s3cmd del --recursive --force s3://statistics/
 
 We begin by installing and copy *Awstats* (where `www.domain.tld` is your domain name):
 
-```bat
+```none
 sudo apt-get install awstats
 sudo cp /etc/awstats/awstats.conf \
         /etc/awstats/awstats.www.domain.tld.conf
@@ -214,7 +214,7 @@ sudo nano /etc/awstats/awstats.www.domain.tld.conf
 
 In this configuration file, change the following settings to specify how to treat *Awstats* logs *Cloudfront* (where `user` is your username):
 
-```bat
+```
 # Processing multiple gzip logs files
 LogFile="/usr/share/awstats/tools/logresolvemerge.pl /home/user/awstats/logs/* |"
 # Formating Cloudfront generated logs
@@ -227,7 +227,7 @@ HostAliases="REGEX[.cloudfront\.net]"
 
 Finally, we copy the images which will be displayed in the reports:
 
-```bat
+```none
 sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
 ```
 
@@ -235,7 +235,7 @@ sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
 
 Once this configuration is done, it is possible to generate statistics as a static HTML file using:
 
-```bat
+```none
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
 ```
@@ -244,7 +244,7 @@ The statistics are now readable from the `awstats.www.domain.tld.html` file. It 
 
 ### Regular updating
 
-To automate the generation of statistics at regular intervals, creating a `stats.sh` with `nano ~ / awstats / stats.sh` that retrieves logs and generates statistics:
+To automate the generation of statistics at regular intervals, creating a `stats.sh` with `nano ~/awstats/stats.sh` that retrieves logs and generates statistics:
 
 ```sh
 #!/bin/sh
@@ -258,7 +258,7 @@ s3cmd del --recursive --force s3://statistics/
 
 We give the rights to this file so it can be executed, and then create a cron task:
 
-```bat
+```none
 sudo chmod 711 ~/awstats/stats.sh
 sudo crontab -e
 ```

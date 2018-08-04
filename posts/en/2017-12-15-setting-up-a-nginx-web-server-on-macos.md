@@ -16,7 +16,7 @@ We will see how to install *Nginx*, PHP-FPM and *MariaDB* (MySQL) on macOS *High
 
 To install, simply execute the command shown on the [official website](http://brew.sh):
 
-```bash
+```none
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
@@ -31,7 +31,7 @@ Although *Apache* is natively included with macOS, we propose here to install *N
 
 To install and launch *Nginx* on startup, we use:
 
-```bash
+```none
 brew install nginx
 sudo brew services start nginx
 ```
@@ -43,7 +43,7 @@ Although we musn't use `sudo` with `brew install`, it is necessary to use it to 
 
 We want to store our web site in the folder of our choice, and access to the URL `http://localhost/`. To do this, edit the configuration file:
 
-```bash
+```none
 nano /usr/local/etc/nginx/nginx.conf
 ```
 
@@ -65,7 +65,7 @@ server {
 ```
 
 We then restart *Nginx* in order to take this changes into account:
-```bash
+```none
 sudo brew services restart nginx
 ```
 
@@ -74,13 +74,13 @@ sudo brew services restart nginx
 In order to use PHP with *Nginx* we will use PHP-FPM.
 Here, we will use PHP 7.2, but you can easily choose any other version:
 
-```bash
+```none
 brew install php72
 ```
 
 Then, we re-edit the configuration file:
 
-```bash
+```none
 nano /usr/local/etc/nginx/nginx.conf
 ```
 
@@ -105,20 +105,20 @@ location ~ \.php {
 
 To avoid a `File not found.` error, we also need to give the right permissions to PHP. In the following file:
 
-```
+```none
 nano /usr/local/etc/php/7.2/php-fpm.d/www.conf
 ```
 
 Change the following parameter to:
 
-```
+```apache
 user = <user>
 group = staff
 ```
 
 At last, we restart *Nginx* to activate the changes, and we don’t forget to launch PHP, to avoid a `502 Bad Gateway`:
 
-```bash
+```none
 sudo brew services restart nginx
 sudo brew services start php72
 ```
@@ -127,14 +127,14 @@ sudo brew services start php72
 
 We will now install and launch MariaDB:
 
-```bash
+```none
 brew install mariadb
 brew services start mariadb
 ```
 
 Finally, complete the installation by choosing a `root` password for MySQL:
 
-```bash
+```none
 mysql_secure_installation
 ```
 

@@ -11,7 +11,7 @@ C'est particulièrement vrai lorsque l'on souhaite indenter ses codes *Liquid*, 
 Par exemple, le code suivant[[qui affiche les multiplications qui ont pour résultat "12"]] va générer près de 500 lignes de code, presque toutes vides:
 
 {% raw %}
-```html
+```liquid
 <ul>
 {% for i in (1..12) %}
   {% for j in (1..12) %}
@@ -45,7 +45,7 @@ Cependant, pour avoir un code HTML plus lisible, nous préférerions comme résu
 La première solution, qui est aussi la moins satisfaisante, est de supprimer les espaces et sauts de ligne que l'on ne souhaite pas voir affichés. Dans l'exemple précédent, nous obtiendrions alors :
 
 {% raw %}
-```html
+```liquid
 <ul>{% for i in (1..12) %}{% for j in (1..12) %}{% assign result = i | times: j %}{% if result == 12 %}
     <li> {{ i }} ⨉ {{ j }} = 12 </li>{% endif %}{% endfor %}{% endfor %}
 </ul>
@@ -63,7 +63,7 @@ En utilisant un `capture` autour d'un code *Liquid*, on masque tout ce qu'il pro
 Le précédent code source deviendrait ainsi :
 
 {% raw %}
-```html
+```liquid
 <ul>{% capture hide %}
 {% for i in (1..12) %}
   {% for j in (1..12) %}
@@ -86,7 +86,7 @@ Le code reste cependant un peu verbeux, et n'est pas très élégant.
 Depuis *Jekyll* 3.0.0, il est possible d'insérer des sauts de lignes et des espaces *dans* les balises *Liquid*, qui n'auront aucun effet sur le code source généré. Il est donc possible d'identer son code ainsi :
 
 {% raw %}
-```html
+```liquid
 <ul>{%
 for i in (1..12) %}{%
   for j in (1..12) %}{%

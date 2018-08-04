@@ -26,14 +26,14 @@ Si vous possédez un compte *GitHub* payant, il vous est par ailleurs possible d
 ### Synchronisation du répertoire en local
 Sur votre ordinateur local, créez le dossier qui accueillera votre site, ouvrez un terminal dans ce dossier, et clonez le répertoire fraîchement créé :
 
-```bash
+```none
 git clone https://github.com/username/username.github.io.git
 cd username.github.io
 ```
 
 Commençons par créer un fichier `.gitignore` qui va nous permettre de ne pas prendre en compte le répertoire `_site` dans lequel le site est généré[[il ne faut en effet pas suivre ce dossier, qui ne dépend qu'un résultat du code à proprement parler]], le fichier `Gemfile.lock` qui sera créé tout à l'heure, et si vous êtes sur macOS les dossiers `.DS_Store` créés par le système d'exploitation. Le fichier `.gitignore` ressemblera donc à :
 
-```bash
+```
 _site
 .jekyll-metadata
 Gemfile.lock
@@ -42,7 +42,7 @@ Gemfile.lock
 
 Nous pouvons alors envoyer ce fichier sur *GitHub*[[lors du premier `push`, vous devrez indiquer votre nom d'utilisateur et votre mot de passe, mais ceux-ci ne seront plus demandés ensuite]] :
 
-```bash
+```none
 git add .gitignore
 git commit -m "First commit"
 git push
@@ -59,7 +59,7 @@ Il est alors facile d'apporter une modification au site avec `git` :
 
 Par exemple, pour envoyer notre nouveau site, on ajoute l'ensemble des nouveaux fichiers, on utilise `git commit` puis `git push` à *GitHub* :
 
-```bash
+```
 git add --all
 git commit -m "Première version du site"
 git push
@@ -78,7 +78,7 @@ C'est pourquoi, pour éviter de casser notre site en ligne, il est important de 
 
 Commencez par créer, à la racine, un fichier `Gemfile` qui fait référence à la gemme `github-pages`, qui indique automatiquement les versions et dépendances utilisées par *GitHub* :
 
-```bash
+```
 source 'https://rubygems.org'
 gem 'github-pages'
 ```
@@ -102,7 +102,7 @@ Si vous voulez utiliser la racine de votre nom de domaine, suivez la [documentat
 ### Page d'erreur 404
 *GitHub* permet d'obtenir une page d'erreur 404 personnalisée[[lorsque vous testez votre site en local avec `bundle exec jekyll serve`, cette page d'erreur est également fonctionnelle : vous pouvez la tester en entrant une URL incorrecte]] : il suffit pour cela de demander à *Jekyll* de générer une page `404.html` à la racine :
 
-```html
+```markdown
 ---
 title: Page introuvable
 permalink: /404.html
@@ -136,7 +136,7 @@ gem 'html-proofer'
 
 Créez alors un fichier `.travis.yml` contenant les instructions permettant de générer le site, puis de le tester :
 
-```
+```yml
 language: ruby
 rvm:
 - 2.1.1

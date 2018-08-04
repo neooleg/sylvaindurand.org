@@ -26,14 +26,14 @@ If you have got a *GitHub* paid plans, you can create a private repository in or
 ### Synchronizing our local folder
 On your computer, create the folder where the website will be stored, then open a terminal and clone the newly created repository:
 
-```bash
+```none
 git clone https://github.com/username/username.github.io.git
 cd username.github.io
 ```
 
 Let's start by creating a `.gitignore` file which will allow us to ignore the `_site` repository in which the website will be generated[[we musn't check this folder, which is only a result of the source code]], the `Gemfile.lock` file we will create later, and if you use on macOS the `.DS_Store` folders created by the operating system. The `.gitignore` file will looks like:
 
-```bash
+```
 _site
 .jekyll-metadata
 Gemfile.lock
@@ -42,7 +42,7 @@ Gemfile.lock
 
 We can now push this file on *GitHub*[[when you `push` for the first time, you have to provide your username and your password, but they won't be asked again]] :
 
-```bash
+```none
 git add .gitignore
 git commit -m "First commit"
 git push
@@ -59,7 +59,7 @@ It is then easy to maintain and edit the website with `git` :
 
 For instance, in order to send our new website, we add every file, then we use  `git commit` then `git push` :
 
-```bash
+```none
 git add --all
 git commit -m "First version"
 git push
@@ -76,13 +76,13 @@ Each time you will use `git push`, your website will be automatically generated 
 
 This is why it is highly important to make sure everything is going to work perfectly, if we don't want to break our website online. In order to ensure your computer most closely matches the GitHub Pages settings, the best way to do is to use `bundler`:
 
-```
+```none
 gem install bundler
 ```
 
 Then, create on the root a `Gemfile` file which will tells to use the `github-pages` gem, which provide automatically the last versions and dependancies used by *GitHub*:
 
-```bash
+```
 source 'https://rubygems.org'
 gem 'github-pages'
 ```
@@ -106,7 +106,7 @@ If you want to use an Apex domain, follow the [GitHub guide](https://help.github
 ### Custom 404 error page
 *GitHub* allows you to have a custom 404 error page. When you test your website locally with `bundle exec jekyll serve`, this error page also works: you can try by providing an incorrect URL. Just tell *Jekyll* to create a `404.html` on the root:
 
-```html
+```markdown
 ---
 title: Page not found
 permalink: /404.html
@@ -138,7 +138,7 @@ gem 'html-proofer'
 
 Finally, create a `.travis.yml` file in order to tell *Travis* how to build and test the website:
 
-```
+```yml
 language: ruby
 rvm:
 - 2.1.1

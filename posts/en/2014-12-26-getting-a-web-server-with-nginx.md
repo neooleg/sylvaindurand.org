@@ -13,13 +13,13 @@ In recent years, *Nginx* has established itself as a high quality alternative: a
 
 Installing *Nginx* is easily obtained with:
 
-```bash
+```none
 pacman -S nginx
 ```
 
 It is then possible to start *Nginx* with:
 
-```bash
+```none
 systemctl start nginx
 ```
 
@@ -31,7 +31,7 @@ We will start by creating a first site entirely static. The files will be locate
 
 For this, we edit the *Nginx* configuration file:
 
-```bash
+```none
 nano /etc/nginx/nginx.conf
 ```
 
@@ -50,14 +50,14 @@ The `listen` parameter specifies the listening port[[we generally chose port 80 
 
 We created this folder, and an `index.html` file with the right attributes:
 
-```bash
+```none
 mkdir -p /srv/http/mysite
 nano /srv/http/index.html
 ```
 
 Its configuration has been modified, we restart *Nginx* to take into account the changes:
 
-```bash
+```none
 systemctl restart nginx
 ```
 
@@ -69,13 +69,13 @@ Static websites, [that's goof](/static-website-with-jekyll/), but being able to 
 
 To install PHP, we use the package `php-fpm` :
 
-```bash
+```none
 pacman -S php-fpm
 ```
 
 The we activate it:
 
-```bash
+```none
 systemctl start php-fpm
 ```
 
@@ -83,7 +83,7 @@ systemctl start php-fpm
 
 As before, we edit the *Nginx* configuration file:
 
-```bash
+```none
 nano /etc/nginx/nginx.conf
 ```
 
@@ -107,7 +107,7 @@ server {
 
 Again, we restart *Nginx*:
 
-```bash
+```none
 systemctl restart nginx
 ```
 
@@ -115,26 +115,27 @@ systemctl restart nginx
 
 A growing number of web applications use `sqlite` as a database. If you need it, install the package `php-sqlite` :
 
-```bash
+```none
 pacman -S php-sqlite
 ```
 
 Then tells PHP to use it by adding at the end of file `/etc/php/php.ini` :
 
-```bash
+```
 extension=pdo_sqlite.so
 ```
 
 Then we restart PHP:
 
-```bash
+```none
 systemctl restart php-fpm
 ```
 
 ### Installing *MySQL*
 
 If you want to use *MySQL*, install the `mariadb` package, start `mysqld` then use the installation script:
-```bash
+
+```none
 pacman -S mariadb
 systemctl start mysqld
 mysql_secure_installation
@@ -142,8 +143,8 @@ mysql_secure_installation
 
 As before, we then tells PHP to use by adding at the end of file `/etc/php/php.ini` :
 
-```bash
-extension=mysql.so
+```
+extension = mysql.so
 ```
 
 ## Examples
@@ -156,7 +157,7 @@ As previously stated, creating a dynamic site for the folder `/srv/http/miniflux
 
 Installation is simple: download *Miniflux*, extract it, and give write access to the folder `data/`.
 
-```
+```none
 cd /srv/http/
 wget http://miniflux.net/miniflux-latest.zip
 unzip miniflux-latest.zip
@@ -167,13 +168,13 @@ chmod 777 data/
 
 Then, to enable monitoring RSS feeds every hour, create a `cron` task with:
 
-```bash
+```none
 crontab -e
 ```
 
 Then enter therein:
 
-```bash
+```r
 0 */1 * * *  cd /srv/http/miniflux && php cronjob.php >/dev/null 2>&1
 ```
 
@@ -183,7 +184,7 @@ Synchronize calendars, contacts and files between different devices - computers,
 
 Again, create a dynamic site for `/srv/http/owncloud/`. Then, we download *OwnCloud*:
 
-```bash
+```none
 mkdir -p /srv/http/owncloud
 wget http://download.owncloud.org/community/owncloud-7.0.4.tar.bz2
 tar xvf owncloud-7.0.4.tar.bz2
@@ -194,7 +195,7 @@ rm -rf owncloud owncloud-7.0.4.tar.bz2
 
 We then add a `cron` task that will automate the update by running:
 
-```bat
+```none
 crontab -e
 ```
 

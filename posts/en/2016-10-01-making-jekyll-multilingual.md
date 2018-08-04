@@ -40,7 +40,7 @@ The method is very simple: we will indicate, for each post and page, its languag
 
 To do so, we will use `lang` et `ref` in the frontmatter of each post and page. For instance, in English:
 
-```python
+```markdown
 ---
 title: Hello world!
 lang: en
@@ -50,7 +50,7 @@ ref: hello
 
 Then, in French:
 
-```python
+```markdown
 ---
 title: Bonjour le monde !
 lang: fr
@@ -60,7 +60,7 @@ ref: hello
 
 Or, in Chinese:
 
-```python
+```markdown
 ---
 title: 你好，世界！
 lang: zh
@@ -171,7 +171,7 @@ Around the articles, it is also necessary to translate the various elements like
 
 To do so, we can provide translations into `_config.yml`[[since *Jekyll* 2.0, it is also possible to put the translations in the [_data](http://jekyllrb.com/docs/datafiles/) folder]]. Then, in the following example, {% raw %}`{{ site.t[page.lang].home }}`{% endraw %} will generate `Home`, `Accueil` or `首页` depending of the page language:
 
-```python
+```yml
 t:
   en:
     home:  "Home"
@@ -183,7 +183,7 @@ t:
 
 It is possible to do the same in order to generate the menu of each version. For example, if you want to provide a two elements menu, you just have to provide in `_config.yml` :
 
-```python
+```yml
 t:
   en:
     home:
@@ -230,7 +230,7 @@ At this point, everything can be translated on the site except the dates automat
 To do so, we just have to use the following code, which we may then put in the `_includes` folder in order to use it when needed:
 
 {% raw %}
-```python
+```liquid
 {% if page.lang == 'en' %}
     {{ page.date | date: "%d/%m/%Y" }}
 {% endif %}
@@ -253,7 +253,7 @@ For the long format dates, it is possible to use date filters and replacements f
 We just have to use the following code:
 
 {% raw %}
-```python
+```liquid
 {% capture hide %}
 
 {% if include.mode != 'month' %}
@@ -330,7 +330,7 @@ We just have to use the following code:
 We this code in a file named `date.html` stored in the `_includes` folder, in order to call it with:
 
 {% raw %}
-```html
+```liquid
 {% include date.html date=page.date %}
 ```
 {% endraw %}
@@ -338,7 +338,7 @@ We this code in a file named `date.html` stored in the `_includes` folder, in or
 Then, we can show the date with:
 
 {% raw %}
-```html
+```liquid
 {{ day }}{{ sup }} {{ month }} {{ year }}
 ```
 {% endraw %}

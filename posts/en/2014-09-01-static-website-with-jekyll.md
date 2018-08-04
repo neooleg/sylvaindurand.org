@@ -23,7 +23,7 @@ This article will show how to install (I) and use (II) the [*Jekyll*](http://jek
 
 Directly install the last stable version of *Ruby*, or [RVM](http://rvm.io/), then simply launch:
 
-```bash
+```none
 gem install jekyll
 ```
 
@@ -45,22 +45,22 @@ With a single command, it is possible to generate the website and create a local
 
 The tree structure may then looks like:
 
-```r
+```none
 mysite/
-        _includes/
-        _layouts/
-                default.html
-                page.html
-                post.html
-        _posts/
-                2014-08-24-static-website-with-jekyll.md
-        assets/
-                style.sass
-                script.js
-                favicon.ico
-        index.html
-        rss.xml
-        _config.yml
+    _includes/
+    _layouts/
+        default.html
+        page.html
+        post.html
+    _posts/
+        2014-08-24-static-website-with-jekyll.md
+    assets/
+        style.sass
+        script.js
+        favicon.ico
+    index.html
+    rss.xml
+    _config.yml
 ```
 
 You can add any folder or file in your website folder. If they don't start with an underscore, *Jekyll* will generate them on the same location.
@@ -75,7 +75,7 @@ In order to create an article, juste create in `_posts` folder a file with a nam
 
 The frontmatter allows us to declare metadata, which will be called or tested in the website[[see below]]. It is set into the top of the file, under the following format:
 
-```r
+```markdown
 ---
 layout: default
 title: My title
@@ -86,7 +86,7 @@ Only the `layout` variable is required: it defines which file in `_layouts/` *Je
 
 It is also possible to define default variables, declared once for all or parts of the articles. For instance, instead of declare `layout: default` in each article stored in `_posts/`, you may declare it once in `_config.yml`:
 
-```ruby
+```yml
 defaults:
   -
     scope:
@@ -108,7 +108,7 @@ Any metadata "`variable`", declared in the frontmatter or as a default, can be c
 It is also possible to do some tests:
 
 {% raw %}
-```r
+```liquid
 {% if page.variable == 'value' %}
     banana
 {% else %}
@@ -120,7 +120,7 @@ It is also possible to do some tests:
 We can also, for example, make loops on each article satisfying some conditions:
 
 {% raw %}
-```r
+```liquid
 {% assign posts=site.posts | where: "variable", "value" %}
 {% for post in posts %}
     {{ post.lang }}

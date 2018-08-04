@@ -37,7 +37,7 @@ In order to show neighbouring countries, we will use data provided by [Natural E
 ```r
 # Reading country and selecting Europe
 europe <- readOGR(dsn="shp/ne/cultural", layer="ne_10m_admin_0_countries")
- <- europe[europe$REGION_UN=="Europe",]
+europe <- europe[europe$REGION_UN=="Europe",]
 ```
 
 ### Projection and plot
@@ -47,12 +47,10 @@ The map will use the [French official projection](http://www.legifrance.gouv.fr/
 Then, we will first plot French boundaries, in order to center the map on France. Borders colors are defined in `border`, their tickness in `lwd` and the filling color in `col`.
 
 ```r
-
 # Projection
 europe <- spTransform(europe, CRS("+init=epsg:2154"))
 
 # Plot
-
 pdf('france.pdf',width=6,height=4.7)
 par(mar=c(0,0,0,0))
 
@@ -74,8 +72,7 @@ The very large number of _communes_ (the smallest administrative level in France
 
 ```r
 # Reading shapefile
-communes     <- readOGR(dsn="shp/geofla", layer="COMMUNE")
-
+communes <- readOGR(dsn="shp/geofla", layer="COMMUNE")
 # Calculate density
 communes$DENSITY <- communes$POPULATION/communes$SUPERFICIE*100000
 ```
@@ -233,8 +230,8 @@ bbox        <- spTransform(bbox,  CRS("+proj=wintri"))
 graticules  <- spTransform(graticules, CRS("+proj=wintri"))
 
 # Ploting world map
-pdf('world.pdf',width=10,height=6) # Exportation en PDF
-par(mar=c(0,0,0,0))                # Marges nulles
+pdf('world.pdf',width=10,height=6) # PDF export
+par(mar=c(0,0,0,0))                # Zero margins
 
 plot(bbox, col="white", border="grey90",lwd=1)
 plot(countries, col="#E6E6E6", border="#AAAAAA",lwd=1, add=TRUE)
@@ -253,6 +250,7 @@ Most frequent usage consists of visualizing data with a color scale. Let's plot 
 # Loading data and merging dataframes
 hdi  <- read.csv('csv/hdi.csv')
 countries <- merge(countries, hdi, by.x="iso_a3", by.y="Abbreviation")
+
 # Converting HDI in numeric
 countries$hdi <- as.numeric(levels(countries$X2012.HDI.Value))[countries$X2012.HDI.Value]
 
@@ -291,8 +289,8 @@ An other kind of visualization is given by circles. Population of most populated
 
 ```r
 # Loading shapefile
-cities <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_populated_places")
-cities <- spTransform(cities,  CRS("+proj=wintri"))
+cities <- readOGR(dsn="shp/ne/cultural", layer="ne_110m_populated_places")
+cities <- spTransform(cities, CRS("+proj=wintri"))
 ```
 
 ### Circle size
@@ -313,10 +311,10 @@ We plot the map:
 pdf('cities.pdf',width=10,height=6)
 par(mar=c(0,0,0,0))
 
-plot(bbox, col="white",    border="grey90",lwd=1)
-plot(countries,  col="#E6E6E6",  border="#AAAAAA",lwd=1, add=TRUE)
-points(cities,col="#8D111766",bg="#8D111766",lwd=1, pch=21,cex=cities$radius)
-plot(graticules,col="#CCCCCC33",lwd=1, add=TRUE)
+plot(bbox, col="white", border="grey90", lwd=1)
+plot(countries, col="#E6E6E6", border="#AAAAAA", lwd=1, add=TRUE)
+points(cities, col="#8D111766", bg="#8D111766", lwd=1, pch=21, cex=cities$radius)
+plot(graticules, col="#CCCCCC33", lwd=1, add=TRUE)
 
 dev.off()
 ```
@@ -333,9 +331,9 @@ areas <- spTransform(areas, CRS("+proj=wintri"))
 
 pdf('areas.pdf',width=10,height=6)
 par(mar=c(0,0,0,0))
-plot(bbox, col="#000000",    border="#000000",lwd=1)
-plot(countries,  col="#000000",  border="#000000",lwd=1, add=TRUE)
-plot(areas,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
+plot(bbox, col="#000000", border="#000000",lwd=1)
+plot(countries, col="#000000", border="#000000",lwd=1, add=TRUE)
+plot(areas, col="#FFFFFF", border="#FFFFFF66",lwd=1.5, add=TRUE)
 
 dev.off()
 ```

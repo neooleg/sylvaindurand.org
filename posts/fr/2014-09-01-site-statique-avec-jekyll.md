@@ -23,7 +23,7 @@ Dans cet article, nous allons voir comment installer (I) et utiliser (II) le gé
 
 Pour installer Jekyll, après avoir installé *Ruby*, par exemple avec [RVM](http://rvm.io/), lancez simplement la commande suivante :
 
-```sh
+```none
 gem install jekyll
 ```
 
@@ -45,22 +45,22 @@ Le code source d'un site *Jekyll* s'organise selon plusieurs dossiers :
 
 Le répertoire de votre site pourra alors ressembler à :
 
-```r
+```none
 monsite/
-        _includes/
-        _layouts/
-                default.html
-                page.html
-                post.html
-        _posts/
-                2014-08-24-site-statique-avec-jekyll.md
-        assets/
-                style.sass
-                script.js
-                favicon.ico
-        index.html
-        rss.xml
-        _config.yml
+    _includes/
+    _layouts/
+        default.html
+        page.html
+        post.html
+    _posts/
+        2014-08-24-site-statique-avec-jekyll.md
+    assets/
+        style.sass
+        script.js
+        favicon.ico
+    index.html
+    rss.xml
+    _config.yml
 ```
 
 Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*.
@@ -75,7 +75,7 @@ Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier 
 
 L'en-tête permet de déclarer les métadonnées de l'article ; celles-ci pourront par la suite être appelées ou testées dans le reste du site[cf. *infra*]. Elle est présente en début de fichier, sous la forme suivante :
 
-```r
+```markdown
 ---
 layout: default
 title: Mon titre
@@ -86,7 +86,7 @@ Seule la variable `layout` est obligatoire : elle définit le fichier que *Jekyl
 
 Il est également possible de définir des variables "par défaut" qui concerneront tous les articles d'un dossier. Par exemple, pour ne pas avoir à indiquer `layout: default` au sein de tous les articles placés dans `_posts/`, il est possible de la définir par défaut dans `_config.yml` :
 
-```ruby
+```yml
 defaults:
   -
     scope:
@@ -108,7 +108,7 @@ Toute métadonnée "`variable`" déclarée dans l'entête peut être appelée, d
 Il est également possible d'effectuer des tests :
 
 {% raw %}
-```r
+```liquid
 {% if page.variable == 'value' %}
     banane
 {% else %}
@@ -120,7 +120,7 @@ Il est également possible d'effectuer des tests :
 Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articles répondant à certaines conditions :
 
 {% raw %}
-```r
+```liquid
 {% assign posts=site.posts | where: "variable", "value" %}
 {% for post in posts %}
     {{ post.lang }}

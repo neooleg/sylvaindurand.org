@@ -14,7 +14,7 @@ Cette possibilité est particulièrement intéressante lorsque l'on utilise de n
 Pour obtenir nos certificats, nous allons utiliser le client `certbot`. Le site propose plusieurs [méthodes d'installation](https://certbot.eff.org) selon votre plateforme, mais la version 0.22.0 peut ne pas être disponible. À défaut, `certbot` doit être installé manuellement :
 
 
-```
+```none
 cd /opt/
 sudo wget https://dl.eff.org/certbot-auto
 sudo chmod a+x certbot-auto
@@ -26,7 +26,7 @@ Pour l'instant, l'utilitaire `certbot-auto` permet de demander des certificats *
 
 Attention, si vous souhaitez un certificat à la fois pour la racine du domaine (`domain.tld`) et l'ensemble de ses sous-domaines (`*.domain.tld`), les deux doivent être spécifiés. Avec l'option `-d`, il est possible de lister les domaines et sous-domaines souhaités :
 
-```
+```none
 sudo /opt/certbot-auto certonly \
     --server https://acme-v02.api.letsencrypt.org/directory \
     --manual -d *.domain.tld -d domain.tdl
@@ -71,18 +71,18 @@ Une fois créé, le certificat se situe dans `/etc/letsencrypt/live/domain.tld`.
 
 Le certificat est valable trois mois, avant de devoir être renouvelé. Pour s'en assurer, on crée une tâche `cron` :
 
-```
+```none
 sudo crontab -e
 ```
 
 We do the renewal in the night from Sunday to Monday:
 
-```
+```none
 30 5 * * 1 /opt/certbot/certbot-auto renew
 ```
 
 It is also necessary to renew its server at the same time, so that it takes into account the new certificates. If you use *nginx*:
 
-```
+```none
 35 5 * * 1 /etc/init.d/nginx reload
 ```

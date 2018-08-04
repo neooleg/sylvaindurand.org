@@ -13,13 +13,13 @@ Dans la ligne de [l'article précédent](/installer-archlinux-sur-raspberry-pi/)
 
 L'installation de *Nginx* s'obtient aisément avec :
 
-```bash
+```none
 pacman -S nginx
 ```
 
 Il est alors possible de démarrer manuellement *Nginx* avec :
 
-```bash
+```none
 systemctl start nginx
 ```
 
@@ -31,7 +31,7 @@ Nous allons commencer par créer un premier site, entièrement statique. Les fic
 
 Pour cela, nous éditons le fichier de configuration de *Nginx* :
 
-```bash
+```none
 nano /etc/nginx/nginx.conf
 ```
 
@@ -50,14 +50,14 @@ Le paramètre `listen` indique le port d'écoute[[on choisit généralement le p
 
 On créé le dossier en question, ainsi qu'un fichier index.html, et on lui donne les bons attributs :
 
-```bash
+```none
 mkdir -p /srv/http/monsite
 nano /srv/http/index.html
 ```
 
 Sa configuration ayant été modifiée, on relance *Nginx* pour prendre en compte les changements :
 
-```bash
+```none
 systemctl restart nginx
 ```
 
@@ -69,13 +69,13 @@ Les sites statiques, [c'est bien](/site-statique-avec-jekyll/), mais pouvoir cr�
 
 Pour installer PHP, nous utilisons le paquet `php-fpm` :
 
-```bash
+```none
 pacman -S php-fpm
 ```
 
 On active alors celui-ci :
 
-```bash
+```none
 systemctl start php-fpm
 ```
 
@@ -83,7 +83,7 @@ systemctl start php-fpm
 
 Comme précedemment, nous éditons le fichier de configuration de *Nginx* :
 
-```bash
+```none
 nano /etc/nginx/nginx.conf
 ```
 
@@ -107,7 +107,7 @@ server {
 
 On relance à nouveau *Nginx* :
 
-```bash
+```none
 systemctl restart nginx
 ```
 
@@ -115,19 +115,19 @@ systemctl restart nginx
 
 Un nombre croissant d'applications web utilisent `sqlite` en guise de base de données. S'il vous est nécessaire, commencez par installer le paquet `php-sqlite` :
 
-```bash
+```none
 pacman -S php-sqlite
 ```
 
 On indique alors à PHP de l'utiliser en ajoutant, à la fin du fichier `/etc/php/php.ini` :
 
-```bash
+```
 extension=pdo_sqlite.so
 ```
 
 On redémarre alors PHP :
 
-```bash
+```none
 systemctl restart php-fpm
 ```
 
@@ -135,7 +135,7 @@ systemctl restart php-fpm
 
 Pour utiliser *MySQL*, on installe le paquet `mariadb`, qu'on active, puis on lance le script d'installation :
 
-```bash
+```none
 pacman -S mariadb
 systemctl start mysqld
 mysql_secure_installation
@@ -143,7 +143,7 @@ mysql_secure_installation
 
 Comme précédemment, on indique alors à PHP de l'utiliser en ajoutant, à la fin du fichier `/etc/php/php.ini` :
 
-```bash
+```
 extension=mysql.so
 ```
 
@@ -157,7 +157,7 @@ Comme indiqué précédemment, créons un site dynamique pour le dossier `/srv/h
 
 L'installation se fait alors simplement : on télécharge *Miniflux*, qu'on décompresse, et on donne les droits de lecture au dossier `data/`.
 
-```
+```none
 cd /srv/http/
 wget http://miniflux.net/miniflux-latest.zip
 unzip miniflux-latest.zip
@@ -168,13 +168,13 @@ chmod 777 data/
 
 Puis, pour activer la surveillance des flux RSS toutes les heures, on créée une tâche `cron` avec la commande :
 
-```bash
+```none
 crontab -e
 ```
 
 On y inscrit alors :
 
-```bash
+```r
 0 */1 * * *  cd /srv/http/miniflux && php cronjob.php >/dev/null 2>&1
 ```
 
@@ -184,7 +184,7 @@ Synchroniser ses calendriers, contacts et différents fichiers entre différents
 
 À nouveau, créons un site dynamique pour le dossier `/srv/http/owncloud/`. Nous y téléchargeons alors *OwnCloud* :
 
-```bash
+```none
 mkdir -p /srv/http/owncloud
 wget http://download.owncloud.org/community/owncloud-7.0.4.tar.bz2
 tar xvf owncloud-7.0.4.tar.bz2
@@ -195,7 +195,7 @@ rm -rf owncloud owncloud-7.0.4.tar.bz2
 
 Nous ajoutons ensuite une tâche `cron` qui va automatiser la mise à jour en exécutant :
 
-```bat
+```none
 crontab -e
 ```
 
