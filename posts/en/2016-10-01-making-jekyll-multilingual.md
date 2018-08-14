@@ -257,39 +257,39 @@ To do so, we just have to put the following code in a file named `date.html` sto
 ```liquid
 {{ include.date | date: "%-d" }}
 
-{%- assign day = include.date | date: "%-d" -%}
-{%- if page.lang != 'fr' -%}
-    {%- case day -%}
-        {%- when '1' or '21' or '31' -%} <sup>st</sup>
-        {%- when '2' or '22' -%} <sup>nd</sup>
-        {%- when '3' or '23' -%} <sup>rd</sup>
-        {%- else -%} <sup>th</sup>
-    {%- endcase -%}
-{%- else -%}
-    {%- if day == "1" -%}
+{% assign day = include.date | date: "%-d" %}
+{% if page.lang != 'fr' %}
+    {% case day %}
+        {% when '1' or '21' or '31' %} <sup>st</sup>
+        {% when '2' or '22' %} <sup>nd</sup>
+        {% when '3' or '23' %} <sup>rd</sup>
+        {% else %} <sup>th</sup>
+    {% endcase %}
+{% else %}
+    {% if day == "1" %}
         <sup>er</sup>
-    {%- endif -%}
-{%- endif %}
+    {% endif %}
+{% endif %}
 
-{% if page.lang != 'fr' -%}
+{% if page.lang != 'fr' %}
     {{ include.date | date: "%B" }}
-{%- else -%}
-    {%- assign m = include.date | date: "%-m" -%}
-    {%- case m -%}
-            {%- when  '1' %}janvier
-            {%- when  '2' %}février
-            {%- when  '3' %}mars
-            {%- when  '4' %}avril
-            {%- when  '5' %}mai
-            {%- when  '6' %}juin
-            {%- when  '7' %}juillet
-            {%- when  '8' %}août
-            {%- when  '9' %}septembre
-            {%- when '10' %}octobre
-            {%- when '11' %}novembre
-            {%- when '12' %}décembre
-    {%- endcase -%}
-{%- endif %}
+{% else %}
+    {% assign m = include.date | date: "%-m" %}
+    {% case m %}
+            {% when  '1' %}janvier
+            {% when  '2' %}février
+            {% when  '3' %}mars
+            {% when  '4' %}avril
+            {% when  '5' %}mai
+            {% when  '6' %}juin
+            {% when  '7' %}juillet
+            {% when  '8' %}août
+            {% when  '9' %}septembre
+            {% when '10' %}octobre
+            {% when '11' %}novembre
+            {% when '12' %}décembre
+    {% endcase %}
+{% endif %}
 
 {{ include.date | date: "%Y" }}
 ```

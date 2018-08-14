@@ -5,7 +5,7 @@ redirect: /serveur-web-local-nginx-pour-os-x/
 categories: Nginx
 ---
 
-Cherchant une solution satisfaisante pour créer un serveur web local permettant de programmer sous macOS avec PHP et MySQL, j'ai été déçu de constater que les solutions «~clés en main~» étaient loin d'égaler les WAMP  qui peuvent exister sous Windows.
+Cherchant une solution satisfaisante pour créer un serveur web local permettant de programmer sous macOS avec PHP et MySQL, j'ai été déçu de constater que les solutions "clés en main" étaient loin d'égaler les WAMP qui peuvent exister sous Windows.
 
 C'était oublier qu'macOS est un système Unix, et que contrairement à Windows, il est parfaitement possible d'y créer un serveur local sur mesure avec quelques paquets.
 
