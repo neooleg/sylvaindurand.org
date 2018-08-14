@@ -27,25 +27,24 @@ To do so, we will replace {% raw %}`{{ content }}`{% endraw %}, in the `_layout/
 
 {% raw %}
 ```liquid
-{% capture hide %}
-  {% assign content = content | split: '<pre' %}
+{% assign content = content | split: '<pre' %}
 
-  {% for parts in content %}
+{% for parts in content %}
 
-    {% assign part = parts | split: '</pre>' %}
-    {% assign c = part.first %}
-    {% assign t = part.last %}
+  {% assign part = parts | split: '</pre>' %}
+  {% assign c = part.first %}
+  {% assign t = part.last %}
 
-    {% if part.size == 2 %}
+  {% if part.size == 2 %}
 
-      {% capture output %}{{ output }}<pre{{ c }}</pre>{% endcapture %}
+    {% capture output %}{{ output }}<pre{{ c }}</pre>{% endcapture %}
 
-    {% endif %}
+  {% endif %}
 
-    {% capture output %}{{ output }}{{ t }}{% endcapture %}
+  {% capture output %}{{ output }}{{ t }}{% endcapture %}
 
-  {% endfor %}
-{% endcapture %}{{ output }}
+{% endfor %}
+{{ output }}
 ```
 {% endraw %}
 
@@ -103,33 +102,32 @@ Finally, the following code provides all the typographical improvements presente
 
 {% raw %}
 ```liquid
-{% capture hide %}
-  {% assign content = content | split: '<pre' %}
+{% assign content = content | split: '<pre' %}
 
-  {% for parts in content %}
+{% for parts in content %}
 
-    {% assign part = parts | split: '</pre>' %}
-    {% assign c = part.first %}
-    {% assign t = part.last %}
+  {% assign part = parts | split: '</pre>' %}
+  {% assign c = part.first %}
+  {% assign t = part.last %}
 
-    {% assign t = t | replace: '“', '«&#160;'
-                    | replace: '”', '&#160;»'
-                    | replace: ' :', '&#160;:'
-                    | replace: ' %', '&#160;%'
-                    | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;'
-                    | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!'
-                    | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
+  {% assign t = t | replace: '“', '«&#160;'
+                  | replace: '”', '&#160;»'
+                  | replace: ' :', '&#160;:'
+                  | replace: ' %', '&#160;%'
+                  | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;'
+                  | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!'
+                  | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 
-    {% if part.size == 2 %}
+  {% if part.size == 2 %}
 
-      {% capture output %}{{ output }}<pre{{ c }}</pre>{% endcapture %}
+    {% capture output %}{{ output }}<pre{{ c }}</pre>{% endcapture %}
 
-    {% endif %}
+  {% endif %}
 
-    {% capture output %}{{ output }}{{ t }}{% endcapture %}
+  {% capture output %}{{ output }}{{ t }}{% endcapture %}
 
-  {% endfor %}
-{% endcapture %}{{ output }}
+{% endfor %}
+{{ output }}
 ```
 {% endraw %}
 
