@@ -251,84 +251,51 @@ For the long format dates, it is possible to use date filters and replacements f
 - in English : "1<sup>st</sup> March 2016" ;
 - in French : "1<sup>er</sup> mars 2016".
 
-We just have to use the following code:
+To do so, we just have to put the following code in a file named `date.html` stored in the `_includes`:
 
 {% raw %}
 ```liquid
-{% capture hide %}
+{{ include.date | date: "%-d" }}
 
-{% if include.mode != 'month' %}
+{%- assign day = include.date | date: "%-d" -%}
+{%- if page.lang != 'fr' -%}
+    {%- case day -%}
+        {%- when '1' or '21' or '31' -%} <sup>st</sup>
+        {%- when '2' or '22' -%} <sup>nd</sup>
+        {%- when '3' or '23' -%} <sup>rd</sup>
+        {%- else -%} <sup>th</sup>
+    {%- endcase -%}
+{%- else -%}
+    {%- if day == "1" -%}
+        <sup>er</sup>
+    {%- endif -%}
+{%- endif %}
 
-      {% assign day = include.date | date: "%-d" %}
+{% if page.lang != 'fr' -%}
+    {{ include.date | date: "%B" }}
+{%- else -%}
+    {%- assign m = include.date | date: "%-m" -%}
+    {%- case m -%}
+            {%- when  '1' %}janvier
+            {%- when  '2' %}février
+            {%- when  '3' %}mars
+            {%- when  '4' %}avril
+            {%- when  '5' %}mai
+            {%- when  '6' %}juin
+            {%- when  '7' %}juillet
+            {%- when  '8' %}août
+            {%- when  '9' %}septembre
+            {%- when '10' %}octobre
+            {%- when '11' %}novembre
+            {%- when '12' %}décembre
+    {%- endcase -%}
+{%- endif %}
 
-  {% if page.lang != 'fr' %}
-
-    {% case day %}
-      {% when '1' or '21' or '31' %}
-        {% capture sup %}<sup>st</sup>{% endcapture %}
-      {% when '2' or '22' %}
-        {% capture sup %}<sup>nd</sup>{% endcapture %}
-      {% when '3' or '23' %}
-        {% capture sup %}<sup>rd</sup>{% endcapture %}
-      {% else %}
-        {% capture sup %}<sup>th</sup>{% endcapture %}
-    {% endcase %}
-
-  {% else %}
-
-    {% if day == "1" %}
-      {% capture sup %}<sup>er</sup>{% endcapture %}
-    {% else %}
-      {% capture sup %}{% endcapture %}
-    {% endif %}
-
-  {% endif %}
-
-{% endif %}
-
-{% if page.lang != 'fr' %}
-
-  {% capture month %}{{ include.date | date: "%B" }}{% endcapture %}
-
-  {% else %}
-
-  {% assign m = include.date | date: "%-m" %}
-  {% case m %}
-    {% when '1' %}
-      {% capture month %}janvier{% endcapture %}
-    {% when '2' %}
-      {% capture month %}février{% endcapture %}
-    {% when '3' %}
-      {% capture month %}mars{% endcapture %}
-    {% when '4' %}
-      {% capture month %}avril{% endcapture %}
-    {% when '5' %}
-      {% capture month %}mai{% endcapture %}
-    {% when '6' %}
-      {% capture month %}juin{% endcapture %}
-    {% when '7' %}
-      {% capture month %}juillet{% endcapture %}
-    {% when '8' %}
-      {% capture month %}août{% endcapture %}
-    {% when '9' %}
-      {% capture month %}septembre{% endcapture %}
-    {% when '10' %}
-      {% capture month %}octobre{% endcapture %}
-    {% when '11' %}
-      {% capture month %}novembre{% endcapture %}
-    {% when '12' %}
-      {% capture month %}décembre{% endcapture %}
-  {% endcase %}
-
-{% endif %}
-
-{% capture year %}{{ include.date | date: "%Y" }}{% endcapture %}
-
-{% endcapture %}
+{{ include.date | date: "%Y" }}
 ```
 {% endraw %}
 
-We this code in a file named `date.html` stored in the `_includes` folder, in order to call it with:
+Then, we just have to call:
 
 {% raw %}
 ```liquid
@@ -336,13 +303,6 @@ We this code in a file named `date.html` stored in the `_includes` folder, in or
 ```
 {% endraw %}
 
-Then, we can show the date with:
-
-{% raw %}
-```liquid
-{{ day }}{{ sup }} {{ month }} {{ year }}
-```
-{% endraw %}
 
 ## Website access and search engine
 
