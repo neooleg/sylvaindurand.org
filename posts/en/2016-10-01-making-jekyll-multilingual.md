@@ -2,6 +2,7 @@
 title: Making <em>Jekyll</em> <br/> multilingual
 original: 2014-02-23
 redirect: /multilingual-website-with-jekyll/
+categories: Jekyll
 ---
 
 J<em>ekyll</em> has a very flexible design that allows a great freedom of choice, allowing the user to simply introduce features that are not integrated into its engine. This is particularly the case when one wants to create a multilingual website: while CMS remain very rigid and often require plugins, few filters are sufficient to achieve it with _Jekyll_.

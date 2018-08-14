@@ -2,6 +2,7 @@
 title: Servir son site <br/> avec <em>Cloudfront</em>
 original: 2014-03-05
 redirect: /site-statique-avec-cloudfront/
+categories: Jekyll
 ---
 
 Les sites statiques ont pour principal intérêt de pouvoir être stockés dans le *nuage*, c'est-à-dire sur des serveurs de contenu permettant de les délivrer très rapidement, à moindre coût, avec une fiabilité et une sécurité extraordinaire.

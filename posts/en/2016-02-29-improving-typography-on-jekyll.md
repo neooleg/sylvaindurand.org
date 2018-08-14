@@ -2,6 +2,7 @@
 title: Improving typography <br/> on <em>Jekyll</em>
 original: 2014-10-30
 redirect: /improving-typography-with-jekyll/
+categories: Jekyll
 ---
 
 Observing typographical rules on the Internet is not always easy: although Unicode reserves many areas of characters for typographic symbols, many punctuation marks and spaces are most of the time unused.

@@ -2,6 +2,7 @@
 title: Rendre <em>Jekyll</em> <br/> multilingue
 original: 2014-02-23
 redirect: /site-multilingue-avec-jekyll/
+categories: Jekyll
 ---
 
 J<em>ekyll</em> laisse une grande liberté de choix en permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré.

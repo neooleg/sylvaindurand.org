@@ -1,6 +1,7 @@
 ---
 title:  Obtenir un serveur<br/> web avec <em>Nginx</em>
 redirect: /synchroniser-calendriers-et-contacts-avec-owncloud/
+categories: Nginx
 ---
 
 A<em>pache</em> était il y a peu la solution incontournable pour créer un serveur web. Ses très nombreuses fonctionnalités induisaient une lourdeur certaine, et son omniprésence le rendait très attaqué, et donc fréquemment mis à jour.

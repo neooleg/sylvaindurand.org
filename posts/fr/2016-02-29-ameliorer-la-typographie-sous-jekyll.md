@@ -2,6 +2,7 @@
 title: Améliorer la typographie <br/> sous <em>Jekyll</em>
 original: 2014-10-30
 redirect: /ameliorer-la-typographie-avec-jekyll/
+categories: Jekyll
 ---
 
 Respecter les règles de typographie sur Internet n'est pas toujours évident : bien qu'Unicode réserve de nombreuses zones de caractères pour les symboles typographiques, signes de ponctuation et espaces de différentes longueurs, leur saisie difficile sur le clavier les rend pratiquement inutilisées.

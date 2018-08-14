@@ -1,5 +1,6 @@
 ---
 title: Site statique <br/> avec <em>Jekyll</em>
+categories: Jekyll
 ---
 
 Au commencement d'Internet étaient les *sites statiques* : chaque page web était rédigée "à la main" à l'aide d'un éditeur de texte, puis mise en ligne. Les inconvénients étaient nombreux, en particulier la nécessité de dupliquer une même modification sur chaque page concernée[[il en découlait une  réelle difficulté à faire évoluer un site sur le long terme]], de connaître le HTML pour le rédacteur et d'avoir son ordinateur à disposition pour éditer les pages. L'apparition du CSS, permettant de séparer la forme du fond et de mutualiser celle-ci pour l'ensemble d'un même site n'a guère changé cet état de fait[[de surcroît, la très faible interopérabilité entre navigateurs et le très mauvais support de CSS par Microsoft Internet Explorer, alors très dominant, ont fortement retardé son utilisation]].

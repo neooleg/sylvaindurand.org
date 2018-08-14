@@ -1,5 +1,6 @@
 ---
 title:  Installing <em>Archlinux</em> <br/> on Raspberry Pi
+categories: Raspberry Pi
 ---
 
 Is it still necessary to present it? The Raspberry Pi is a nano-computer which, due to its small size, low power consumption and very low cost[[about 35 € in its most powerful version, to which must be added an SD card, μUSB  and ethernet cables, less than € 50 in total]], makes an essential personal server or hack tool.

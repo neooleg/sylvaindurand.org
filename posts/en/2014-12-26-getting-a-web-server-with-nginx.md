@@ -1,6 +1,7 @@
 ---
 title:  Getting a web<br/> server with <em>Nginx</em>
 redirect: /synchronize-calendars-and-contacts-with-owncloud/
+categories: Nginx
 ---
 
 A<em>pache</em> was once the ideal solution for creating a web server. Its great features induced a certain heaviness, and its popularity made him very attacked, and therefore frequently updated.

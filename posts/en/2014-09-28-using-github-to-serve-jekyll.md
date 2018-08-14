@@ -1,5 +1,6 @@
 ---
 title: Using Github <br/> to serve <em>Jekyll</em>
+categories: Jekyll
 ---
 
 G*itHub* has created a wonderful ecosystem built around the static websites generator *Jekyll*. *[GitHub Pages](https://pages.github.com/)* allows to generate, then to serve automatically *Jekyll* websites. This service, free and quite effective, brings together the best aspects of static websites – speed, reliability, security, ability to use `git` – while allowing their modification online.

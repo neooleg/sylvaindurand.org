@@ -1,5 +1,6 @@
 ---
 title: Static website <br/> with <em>Jekyll</em>
+categories: Jekyll
 ---
 
 At the beginning of the Internet, there were *static sites*: each web page was written "by hand" using a text editor, and then put online. The disadvantages are many, especially the need to duplicate the same changes on some pages[[this is why it was sometimes really hard to maintain a website]], to know HTML and to have his computer available to edit pages. The advent of CSS, which allows to separate actual content from its presentation format and to share it between the pages has not changed this fact[[moreover, the inexistant interoperability between browsers and the poor support of CSS with Microsoft Internet Explorer, have delayed its use]].

@@ -2,6 +2,7 @@
 title: Setting up a <em>Nginx</em> <br/>web server on macOS
 original: 2016-01-05
 redirect: ['/setting-up-an-nginx-web-server-on-os-x/', '/setting-up-an -nginx-web server-on-os-x/', '/setting-up-a-nginx-web-server-on-os-x/']
+categories: Nginx
 ---
 
 Seeking a satisfactory solution to create a local web server for programming in macOS with PHP and MySQL, I was disappointed that the turnkey solutions were far from equaling the WAMP that may exist on Windows.

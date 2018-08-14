@@ -1,5 +1,6 @@
 ---
 title:  Installer <em>Archlinux</em> <br/> sur Raspberry Pi
+categories: Raspberry Pi
 ---
 
 Est-il encore nécessaire de le présenter ? Le Raspberry Pi est un nano-ordinateur, dont la toute petite taille, la très faible consommation électrique et le très faible coût[[environ 35 € dans sa version la plus puissante, auxquels doivent s'ajouter une carte SD, un câble d'alimentation µUSB et un câble ethernet, soit moins de 50 € au total]] en font un serveur personnel ou un support de bidouillage indispensable.

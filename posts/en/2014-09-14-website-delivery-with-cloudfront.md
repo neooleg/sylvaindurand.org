@@ -2,6 +2,7 @@
 title: Website delivery <br/> with <em>Cloudfront</em>
 original: 2014-03-05
 redirect: /static-website-with-cloudfront/
+categories: Jekyll
 ---
 
 The main interest of static website is to be able to be stored in the *cloud*, that is to say on a content delivery network able to serve our data with amazing performances, a very low cost, and multiple benefits in terms of lightness, safety and reliability.
