@@ -4,6 +4,76 @@ language: Javascript
 desc: Lightweight, modulable and dynamic financial charts.
 ---
 
-Lightweight, modulable and dynamic financial charts, allowing to plot stocks or financial indicators. You can have a look on the [reference](https://github.com/sylvaindurand/d3-stockcharts) or check the [source code](https://github.com/sylvaindurand/d3-stockcharts).
+### D3 Stock charts
+
+This script aims to provide simple, lightweight, modulable and responsive *financial charts*. It allows to draw curves, areas or bands, on one or several charts, to show custom time intervals, and show values on over.  You can have a look on the [reference](https://github.com/sylvaindurand/d3-stockcharts) or check the [source code](https://github.com/sylvaindurand/d3-stockcharts).
 
 <div class="iframe" style="max-width: 800px"><div style="padding-bottom: 65%"><iframe src="https://sylvaindurand.github.io/d3-stockcharts/" scrolling="no"></iframe></div></div>
+
+
+### Functions
+
+<a href="#new" name="new">#</a> <b>stockchart</b>(<i>data</i>, <i>time</i>, <i>container</i>, <i>parameters</i>)
+
+Create a stockchart constructor and show the chart in the specified *container*, based on the specified *data* (see [*stocks*.load](#load)), *time* interval (see [*stocks*.show](#show)), and module and curves *parameters* (see below).
+
+```js
+d3.csv("mydata.csv", function(e, data) {
+  var chart = new stockchart(data, "1y", "#mydiv", parameters);
+});
+```
+
+<a href="#load" name="load">#</a> <i>stocks</i>.<b>load</b>(<i>data</i>)
+
+Read and draw the specified data, which can be returned from [d3.csv](https://github.com/d3/d3-request/blob/master/README.md#csv), [d3.tsv](https://github.com/d3/d3-request/blob/master/README.md#tsv), [d3.json](https://github.com/d3/d3-request/blob/master/README.md#json) or [d3.xml](https://github.com/d3/d3-request/blob/master/README.md#xml). If another chart is already shown, clear the current chart and draw the specified data.
+
+```js
+d3.csv("mydata.csv", function(e, data) {
+  chart.load(data);
+});
+```
+
+<a href="#show" name="show">#</a> <i>stocks</i>.<b>show</b>([<i>time</i>])
+
+Show data from the specified time interval, provided as a string in months (*e.g.* `6m`) or years (*e.g.* `2y`). If time interval isn't specified or can't be read, show all values.
+
+```js
+chart.show("2y");
+chart.show("6m");
+```
+
+### Parameters
+The *parameters* argument provides a list of charts (defined as objects), which contains a list of curves (also defined as object). Both can take several options.
+
+
+#### Charts
+
+<a href="#curves" name="curves">#</a> <b>curves</b>: list of the curves to be drawn in the current chart; see below.
+
+<a href="#height" name="height">#</a> <b>height</b>: defines the height of the current chart, which defaults to 60.
+
+<a href="#ratio" name="ratio">#</a> <b>ratio</b>: gives the ability to show relative values, based on the data selected the specified `id`; if simply set to `true`, show relative values based on each variable.
+
+<a href="#x_axis" name="x_axis">#</a> <b>x_axis</b>: if true, draw an horizontal axis under the given chart.
+
+<a href="#y_axis" name="y_axis">#</a> <b>y_axis</b>: if `sym` is provided, the vertical axis will have a symetrical domain.
+
+
+#### Curves
+
+<a href="#color" name="color">#</a> <b>color</b>: specify the color of the curve.
+
+<a href="#diff" name="diff">#</a> <b>diff</b>: if *true*, show the evolution since the day before in the legend.
+
+<a href="#id" name="id">#</a> <b>id</b>: set the curve `id`, which must be the same than the column name in the provided *data*; if an array of two `id` is specified, draw an area between those two curves.
+
+<a href="#name" name="name">#</a> <b>name</b>: specify the name shown in the legend; if not specified, the data won't be shown in the legend.
+
+<a href="#type" name="type">#</a> <b>type</b>: if `area` is provided, draw a green and red area chart depending of the sign.
+
+<a href="#width" name="width">#</a> <b>width</b>: specify the width of the curve.
+
+
+### License
+
+This repository is released under [MIT License](http://opensource.org/licenses/MIT).
