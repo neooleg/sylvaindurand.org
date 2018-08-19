@@ -119,7 +119,7 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
 ```
 {% endraw %}
 
-Comme vous pouvez le voir, nous devons répéter le code : une fois pour les pages (`site.page`) et une fois pour les articles (`site.articles`). Il sera possible de réduire le code lorsque *Jekyll* prendra en charge *Liquid* 4.
+Comme vous pouvez le voir, nous devons répéter le code : une fois pour les pages (`site.page`) et une fois pour les articles (`site.posts`). Il sera possible de réduire le code lorsque *Jekyll* prendra en charge *Liquid* 4.
 
 Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[[pour cela, il faut bien déclarer l'attribut `lang` de la balise `html` en indiquant `<html lang="{{ page.lang }}">` dans le *layout*]]. Par exemple, pour la mettre en gras :
 
