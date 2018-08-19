@@ -118,7 +118,7 @@ To create a language selector, like the one at the top right of this page, the p
 ```
 {% endraw %}
 
-As you can see, we need to repeat the code for the pages (`site.page`) and the posts (`site.articles`). It will be possible to delete this redundancy when *Jekyll* will use *Liquid* 4.
+As you can see, we need to repeat the code for the pages (`site.page`) and the posts (`site.posts`). It will be possible to delete this redundancy when *Jekyll* will use *Liquid* 4.
 
 Then, in order to emphase the actual version, just use CSS[[you need to declare the `lang` attribute on the `html`, with `<html lang="{{ page.lang }}">` in the *layout*]]. For instance, if you want to bold it:
 
