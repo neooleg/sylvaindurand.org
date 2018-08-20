@@ -262,6 +262,8 @@ Nous utilisons alors le code suivant, que l'on place dans un fichier `date.html`
 
 {% raw %}
 ```liquid
+{{ include.date | date: "%-d" }}
+
 {% assign day = include.date | date: "%-d" %}
 {% if page.lang != 'fr' %}
     {% case day %}
