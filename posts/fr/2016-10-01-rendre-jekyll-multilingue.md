@@ -262,23 +262,20 @@ Nous utilisons alors le code suivant, que l'on place dans un fichier `date.html`
 
 {% raw %}
 ```liquid
-{{ include.date | date: "%-d" }}
-
 {% assign day = include.date | date: "%-d" %}
 {% if page.lang != 'fr' %}
     {% case day %}
-        {% when '1' or '21' or '31' %} <sup>st</sup>
-        {% when '2' or '22' %} <sup>nd</sup>
-        {% when '3' or '23' %} <sup>rd</sup>
-        {% else %} <sup>th</sup>
+        {% when '1' or '21' or '31' %} {{ day }}<sup>st</sup>
+        {% when '2' or '22' %} {{ day }}<sup>nd</sup>
+        {% when '3' or '23' %} {{ day }}<sup>rd</sup>
+        {% else %} {{ day }}<sup>th</sup>
     {% endcase %}
 {% else %}
     {% if day == "1" %}
-        <sup>er</sup>
+        {{ day }}<sup>er</sup>
+    {% else %} {{ day }}
     {% endif %}
-{% endif %}
-
-{% if page.lang != 'fr' %}
+{% endif %} {% if page.lang != 'fr' %}
     {{ include.date | date: "%B" }}
 {% else %}
     {% assign m = include.date | date: "%-m" %}
@@ -296,9 +293,7 @@ Nous utilisons alors le code suivant, que l'on place dans un fichier `date.html`
             {% when '11' %}novembre
             {% when '12' %}décembre
     {% endcase %}
-{% endif %}
-
-{{ include.date | date: "%Y" }}
+{% endif %} {{ include.date | date: "%Y" }}
 ```
 {% endraw %}
 
